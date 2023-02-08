@@ -25,9 +25,34 @@
  */
 int main() {
   std::cout << "Program started\n";
+  std::cout << "\n";
 
-  SpiData _spiData;
-  SpiCommand _spiCommand;
+  // SpiData _spiData;
+  // SpiCommand _spiCommand;
+
+  int spiCommand = 10;          // leg_controller
+  int spi_command_drv = 4;      // rt_spi
+  int* cmd = &spi_command_drv;
+
+  std::cout << "&spiCommand init: " << &spiCommand << "\n";
+  std::cout << "&spi_command_drv init: " << &spi_command_drv << "\n";
+  std::cout << "&cmd init: " << &cmd << "\n";
+
+  std::cout << "spiCommand init: " << spiCommand << "\n";
+  std::cout << "spi_command_drv init: " << spi_command_drv << "\n";
+  std::cout << "cmd init: " << cmd << "\n";
+  
+  memcpy(cmd, &spiCommand, sizeof(int));
+
+  std::cout << "\n";
+
+  std::cout << "&spiCommand final: " << &spiCommand << "\n";
+  std::cout << "&spi_command_drv final: " << &spi_command_drv << "\n";
+  std::cout << "&cmd final: " << &cmd << "\n";
+
+  std::cout << "spiCommand final: " << spiCommand << "\n";
+  std::cout << "spi_command_drv final: " << spi_command_drv << "\n";
+  std::cout << "cmd final: " << cmd << "\n";
 
   // init_spi_biqu()
 
