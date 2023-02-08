@@ -1,2 +1,0 @@
-/usr/bin/ar qc librt.a  CMakeFiles/rt.dir/src/rt_spi.cpp.o
-/usr/bin/ranlib librt.a

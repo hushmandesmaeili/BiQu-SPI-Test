@@ -1,8 +1,0 @@
-/home/hesmaeili/Documents/quadruped/SPI_test/build/CMakeFiles/rebuild_cache.dir
-/home/hesmaeili/Documents/quadruped/SPI_test/build/CMakeFiles/edit_cache.dir
-/home/hesmaeili/Documents/quadruped/SPI_test/build/rt/CMakeFiles/rebuild_cache.dir
-/home/hesmaeili/Documents/quadruped/SPI_test/build/rt/CMakeFiles/edit_cache.dir
-/home/hesmaeili/Documents/quadruped/SPI_test/build/rt/CMakeFiles/rt.dir
-/home/hesmaeili/Documents/quadruped/SPI_test/build/motorApp/CMakeFiles/rebuild_cache.dir
-/home/hesmaeili/Documents/quadruped/SPI_test/build/motorApp/CMakeFiles/edit_cache.dir
-/home/hesmaeili/Documents/quadruped/SPI_test/build/motorApp/CMakeFiles/motorApp.dir
