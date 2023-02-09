@@ -28,6 +28,9 @@ int spi_biqu_open();
 static spine_cmd_t g_spine_cmd;
 static spine_data_t g_spine_data;
 
+static spine_biqu_cmd_t g_spine_biqu_cmd;
+static spine_biqu_data_t g_spine_biqu_data;
+
 spi_command_t spi_command_drv;
 spi_data_t spi_data_drv;
 spi_torque_t spi_torque;
@@ -327,6 +330,48 @@ void spi_to_spine(spi_command_t *cmd, spine_cmd_t *spine_cmd, int leg_0) {
 }
 
 /*!
+ * convert spi command to spine_biqu_cmd_t BiQu
+ */
+void spi_to_spine_biqu(spi_command_t *cmd, spine_biqu_cmd_t *spine_cmd) {
+  for (int i = 0; i < 4; i++) {
+    spine_cmd->q_des_abad[i] =
+        (cmd->q_des_abad[i] * abad_side_sign[i]) +
+        abad_offset[i];
+    spine_cmd->q_des_hip[i] =
+        (cmd->q_des_hip[i] * hip_side_sign[i]) +
+        hip_offset[i];
+    spine_cmd->q_des_knee[i] =
+        (cmd->q_des_knee[i] / knee_side_sign[i]) +
+        knee_offset[i];
+
+    spine_cmd->qd_des_abad[i] =
+        cmd->qd_des_abad[i] * abad_side_sign[i];
+    spine_cmd->qd_des_hip[i] =
+        cmd->qd_des_hip[i] * hip_side_sign[i];
+    spine_cmd->qd_des_knee[i] =
+        cmd->qd_des_knee[i] / knee_side_sign[i];
+
+    spine_cmd->kp_abad[i] = cmd->kp_abad[i];
+    spine_cmd->kp_hip[i] = cmd->kp_hip[i];
+    spine_cmd->kp_knee[i] = cmd->kp_knee[i];
+
+    spine_cmd->kd_abad[i] = cmd->kd_abad[i];
+    spine_cmd->kd_hip[i] = cmd->kd_hip[i];
+    spine_cmd->kd_knee[i] = cmd->kd_knee[i];
+
+    spine_cmd->tau_abad_ff[i] =
+        cmd->tau_abad_ff[i] * abad_side_sign[i];
+    spine_cmd->tau_hip_ff[i] =
+        cmd->tau_hip_ff[i] * hip_side_sign[i];
+    spine_cmd->tau_knee_ff[i] =
+        cmd->tau_knee_ff[i] * knee_side_sign[i];
+
+    spine_cmd->flags[i] = cmd->flags[i];
+  }
+  spine_cmd->checksum = xor_checksum((uint32_t *)spine_cmd, 64);
+}
+
+/*!
  * convert spine_data_t to spi data
  */
 void spine_to_spi(spi_data_t *data, spine_data_t *spine_data, int leg_0) {
@@ -348,6 +393,33 @@ void spine_to_spi(spi_data_t *data, spine_data_t *spine_data, int leg_0) {
   }
 
   uint32_t calc_checksum = xor_checksum((uint32_t *)spine_data, 14);
+  if (calc_checksum != (uint32_t)spine_data->checksum)
+    printf("SPI ERROR BAD CHECKSUM GOT 0x%hx EXPECTED 0x%hx\n", calc_checksum,
+           spine_data->checksum);
+}
+
+/*!
+ * convert spine_biqu_data_t to spi data
+ */
+void spine_to_spi_biqu(spi_data_t *data, spine_biqu_data_t *spine_data) {
+  for (int i = 0; i < 4; i++) {
+    data->q_abad[i] = (spine_data->q_abad[i] - abad_offset[i]) *
+                              abad_side_sign[i];
+    data->q_hip[i] = (spine_data->q_hip[i] - hip_offset[i]) *
+                             hip_side_sign[i];
+    data->q_knee[i] = (spine_data->q_knee[i] - knee_offset[i]) *
+                              knee_side_sign[i];
+
+    data->qd_abad[i] =
+        spine_data->qd_abad[i] * abad_side_sign[i];
+    data->qd_hip[i] = spine_data->qd_hip[i] * hip_side_sign[i];
+    data->qd_knee[i] =
+        spine_data->qd_knee[i] * knee_side_sign[i];
+
+    data->flags[i] = spine_data->flags[i];
+  }
+
+  uint32_t calc_checksum = xor_checksum((uint32_t *)spine_data, 28);
   if (calc_checksum != (uint32_t)spine_data->checksum)
     printf("SPI ERROR BAD CHECKSUM GOT 0x%hx EXPECTED 0x%hx\n", calc_checksum,
            spine_data->checksum);
@@ -424,57 +496,55 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data) {
   data->spi_driver_status = spi_driver_iterations << 16;
 
   // transmit and receive buffers
-  uint16_t tx_buf[K_WORDS_PER_MESSAGE];
-  uint16_t rx_buf[K_WORDS_PER_MESSAGE];
+  uint16_t tx_buf[K_WORDS_PER_MESSAGE_BIQU];
+  uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU];
 
-  for (int spi_board = 0; spi_board < 2; spi_board++) {
-    // copy command into spine type:
-    spi_to_spine(command, &g_spine_cmd, spi_board * 2);
+  // copy command into spine type:
+  spi_to_spine_biqu(command, &g_spine_biqu_cmd);
 
-    // pointers to command/data spine array
-    uint16_t *cmd_d = (uint16_t *)&g_spine_cmd;
-    uint16_t *data_d = (uint16_t *)&g_spine_data;
+  // pointers to command/data spine array
+  uint16_t *cmd_d = (uint16_t *)&g_spine_biqu_cmd;
+  uint16_t *data_d = (uint16_t *)&g_spine_biqu_data;
 
-    // zero rx buffer
-    memset(rx_buf, 0, K_WORDS_PER_MESSAGE * sizeof(uint16_t));
+  // zero rx buffer
+  memset(rx_buf, 0, K_WORDS_PER_MESSAGE_BIQU * sizeof(uint16_t));
 
-    // copy into tx buffer flipping bytes
-    for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
-      tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
-    // tx_buf[i] = __bswap_16(cmd_d[i]);
+  // copy into tx buffer flipping bytes
+  for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
+    tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
+  // tx_buf[i] = __bswap_16(cmd_d[i]);
 
-    // each word is two bytes long
-    size_t word_len = 2;  // 16 bit word
+  // each word is two bytes long
+  size_t word_len = 2;  // 16 bit word
 
-    // spi message struct
-    struct spi_ioc_transfer spi_message[1];
+  // spi message struct
+  struct spi_ioc_transfer spi_message[1];
 
-    // zero message struct.
-    memset(spi_message, 0, 1 * sizeof(struct spi_ioc_transfer));
+  // zero message struct.
+  memset(spi_message, 0, 1 * sizeof(struct spi_ioc_transfer));
 
-    // set up message struct
-    for (int i = 0; i < 1; i++) {
-      spi_message[i].bits_per_word = spi_bits_per_word;
-      spi_message[i].cs_change = 1;
-      spi_message[i].delay_usecs = 0;
-      spi_message[i].len = word_len * 66;
-      spi_message[i].rx_buf = (uint64_t)rx_buf;
-      spi_message[i].tx_buf = (uint64_t)tx_buf;
-    }
-
-    // do spi communication
-    int rv = ioctl(spi_1_fd, SPI_IOC_MESSAGE(1),
-                   &spi_message);
-    (void)rv;
-
-    // flip bytes the other way
-    for (int i = 0; i < 30; i++)
-      data_d[i] = (rx_buf[i] >> 8) + ((rx_buf[i] & 0xff) << 8);
-    // data_d[i] = __bswap_16(rx_buf[i]);
-
-    // copy back to data
-    spine_to_spi(data, &g_spine_data, spi_board * 2);
+  // set up message struct
+  for (int i = 0; i < 1; i++) {
+    spi_message[i].bits_per_word = spi_bits_per_word;
+    spi_message[i].cs_change = 1;
+    spi_message[i].delay_usecs = 0;
+    spi_message[i].len = word_len * K_WORDS_PER_MESSAGE_BIQU;
+    spi_message[i].rx_buf = (uint64_t)rx_buf;
+    spi_message[i].tx_buf = (uint64_t)tx_buf;
   }
+
+  // do spi communication
+  int rv = ioctl(spi_1_fd, SPI_IOC_MESSAGE(1),
+                  &spi_message);
+  (void)rv;
+
+  // flip bytes the other way
+  for (int i = 0; i < 58; i++)  // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
+    data_d[i] = (rx_buf[i] >> 8) + ((rx_buf[i] & 0xff) << 8);
+  // data_d[i] = __bswap_16(rx_buf[i]);
+
+  // copy back to data
+  spine_to_spi_biqu(data, &g_spine_biqu_data);
 }
 
 /*!
