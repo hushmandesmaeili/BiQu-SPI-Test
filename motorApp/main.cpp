@@ -27,34 +27,55 @@ int main() {
   std::cout << "Program started\n";
   std::cout << "\n";
 
-  // SpiData _spiData;
-  // SpiCommand _spiCommand;
+  // Setup  and Open SPI
+  int rv = 0;
+  int spi_1_fd = open("/dev/spidev2.0", O_RDWR);
+  if (spi_1_fd < 0) perror("[ERROR] Couldn't open spidev 2.0");
 
-  int spiCommand = 10;          // leg_controller
-  int spi_command_drv = 4;      // rt_spi
-  int* cmd = &spi_command_drv;
+  rv = ioctl(spi_1_fd, SPI_IOC_WR_MODE, SPI_MODE_0);
+  if (rv < 0) perror("[ERROR] ioctl spi_ioc_wr_mode (1)");
 
-  std::cout << "&spiCommand init: " << &spiCommand << "\n";
-  std::cout << "&spi_command_drv init: " << &spi_command_drv << "\n";
-  std::cout << "&cmd init: " << &cmd << "\n";
+  rv = ioctl(spi_1_fd, SPI_IOC_RD_MODE, SPI_MODE_0);
+  if (rv < 0) perror("[ERROR] ioctl spi_ioc_rd_mode (1)");
 
-  std::cout << "spiCommand init: " << spiCommand << "\n";
-  std::cout << "spi_command_drv init: " << spi_command_drv << "\n";
-  std::cout << "cmd init: " << cmd << "\n";
-  
-  memcpy(cmd, &spiCommand, sizeof(int));
+  rv = ioctl(spi_1_fd, SPI_IOC_WR_BITS_PER_WORD, 8);
+  if (rv < 0) perror("[ERROR] ioctl spi_ioc_wr_bits_per_word (1)");
 
-  std::cout << "\n";
+  rv = ioctl(spi_1_fd, SPI_IOC_RD_BITS_PER_WORD, 8);
+  if (rv < 0) perror("[ERROR] ioctl spi_ioc_rd_bits_per_word (1)");
 
-  std::cout << "&spiCommand final: " << &spiCommand << "\n";
-  std::cout << "&spi_command_drv final: " << &spi_command_drv << "\n";
-  std::cout << "&cmd final: " << &cmd << "\n";
+  rv = ioctl(spi_1_fd, SPI_IOC_WR_MAX_SPEED_HZ, 6000000);
+  if (rv < 0) perror("[ERROR] ioctl spi_ioc_wr_max_speed_hz (1)");
 
-  std::cout << "spiCommand final: " << spiCommand << "\n";
-  std::cout << "spi_command_drv final: " << spi_command_drv << "\n";
-  std::cout << "cmd final: " << cmd << "\n";
+  rv = ioctl(spi_1_fd, SPI_IOC_RD_MAX_SPEED_HZ, 6000000);
+  if (rv < 0) perror("[ERROR] ioctl spi_ioc_rd_max_speed_hz (1)");
 
-  // init_spi_biqu()
+  rv = ioctl(spi_1_fd, SPI_IOC_RD_LSB_FIRST, 0x01);
+  if (rv < 0) perror("[ERROR] ioctl spi_ioc_rd_lsb_first (1)");
+
+
+  // spi message struct
+  struct spi_ioc_transfer spi_message[1];
+
+  uint8_t tx_buf[2] = {1, 2};
+  uint8_t rx_buf[2];
+
+  // set up message struct
+  for (int i = 0; i < 1; i++) {
+    spi_message[i].bits_per_word = 8;
+    spi_message[i].cs_change = 1;
+    spi_message[i].delay_usecs = 0;
+    spi_message[i].len = 2;
+    spi_message[i].rx_buf = (uint8_t)rx_buf;
+    spi_message[i].tx_buf = (uint8_t)tx_buf;
+
+  // do spi communication
+  int rv = ioctl(spi_1_fd, SPI_IOC_MESSAGE(1),
+                  &spi_message);
+  (void)rv;
+
+  std::cout << rx_buf[0] << "\n";
+  std::cout << rx_buf[1] << "\n";
 
   return 0;
 }
