@@ -68,6 +68,7 @@ int main() {
     spi_message[i].len = 2;
     spi_message[i].rx_buf = (uint8_t)rx_buf;
     spi_message[i].tx_buf = (uint8_t)tx_buf;
+  }
 
   // do spi communication
   int rv = ioctl(spi_1_fd, SPI_IOC_MESSAGE(1),
