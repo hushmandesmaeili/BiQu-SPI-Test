@@ -35,8 +35,8 @@ int main() {
 
   // Setup  and Open SPI
   int rv = 0;
-  int spi_1_fd = open("/dev/spidev2.0", O_RDWR);
-  if (spi_1_fd < 0) perror("[ERROR] Couldn't open spidev 2.0");
+  int spi_1_fd = open("/dev/spidev0.0", O_RDWR);
+  if (spi_1_fd < 0) perror("[ERROR] Couldn't open spidev 0.0");
 
   rv = ioctl(spi_1_fd, SPI_IOC_WR_MODE, &spi_mode);
   if (rv < 0) perror("[ERROR] ioctl spi_ioc_wr_mode (1)");
