@@ -54,11 +54,22 @@ int main() {
   if (rv < 0) perror("[ERROR] ioctl spi_ioc_rd_lsb_first (1)");
 
 
-  // spi message struct
+  uint8_t tx_buf[2];
+  uint8_t rx_buf[2];
+
+  uint8_t arr[2] = {1, 2};
+
+  uint8_t *cmd_d = (uint8_t *)&arr;
+
+  // copy into tx buffer flipping bytes
+  for (int i = 0; i < 2; i++)
+    tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
+
+   // spi message struct
   struct spi_ioc_transfer spi_message[1];
 
-  uint8_t tx_buf[2] = {1, 2};
-  uint8_t rx_buf[2];
+  // zero message struct.
+  memset(spi_message, 0, 1 * sizeof(struct spi_ioc_transfer));
 
   // set up message struct
   for (int i = 0; i < 1; i++) {
@@ -66,12 +77,12 @@ int main() {
     spi_message[i].cs_change = 1;
     spi_message[i].delay_usecs = 0;
     spi_message[i].len = 2;
-    spi_message[i].rx_buf = (uint8_t)rx_buf;
-    spi_message[i].tx_buf = (uint8_t)tx_buf;
+    spi_message[i].rx_buf = (uint64_t)rx_buf;
+    spi_message[i].tx_buf = (uint64_t)tx_buf;
   }
 
   // do spi communication
-  int rv = ioctl(spi_1_fd, SPI_IOC_MESSAGE(1),
+  rv = ioctl(spi_1_fd, SPI_IOC_MESSAGE(1),
                   &spi_message);
   (void)rv;
 
