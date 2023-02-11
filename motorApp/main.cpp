@@ -60,17 +60,23 @@ int main() {
   if (rv < 0) perror("[ERROR] ioctl spi_ioc_rd_lsb_first (1)");
 
 
-  uint8_t tx_buf[2];
-  uint8_t rx_buf[2];
+  uint16_t tx_buf[4];
+  uint16_t rx_buf[4];
 
-  uint8_t arr[2] = {1, 2};
+  uint16_t arr[4] = {1, 2, 3, 4};
 
-  uint8_t *cmd_d = (uint8_t *)&arr;
+  uint16_t *cmd_d = (uint16_t *)&arr;
+  std::cout << cmd_d << "\n";
 
   // copy into tx buffer flipping bytes
-  for (int i = 0; i < 2; i++)
+  for (int i = 0; i < 4; i++)
     tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
 
+  std::cout << tx_buf[0] << "\n";
+  std::cout << tx_buf[1] << "\n";
+  std::cout << tx_buf[2] << "\n";
+  std::cout << tx_buf[3] << "\n";
+  
    // spi message struct
   struct spi_ioc_transfer spi_message[1];
 
@@ -79,10 +85,10 @@ int main() {
 
   // set up message struct
   for (int i = 0; i < 1; i++) {
-    spi_message[i].bits_per_word = 8;
+    spi_message[i].bits_per_word = spi_bits_per_word;
     spi_message[i].cs_change = 1;
     spi_message[i].delay_usecs = 0;
-    spi_message[i].len = 2;
+    spi_message[i].len = 8;
     spi_message[i].rx_buf = (uint64_t)rx_buf;
     spi_message[i].tx_buf = (uint64_t)tx_buf;
   }
@@ -90,6 +96,8 @@ int main() {
   // do spi communication
   rv = ioctl(spi_1_fd, SPI_IOC_MESSAGE(1),
                   &spi_message);
+  if (rv == 1) perror("[ERROR] cannot send message");
+  std::cout << "rv = " << rv << "\n";
   (void)rv;
 
   std::cout << rx_buf[0] << "\n";
