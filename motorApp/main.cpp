@@ -64,8 +64,10 @@ int main() {
   uint16_t rx_buf[4];
 
   uint16_t arr[4] = {1, 2, 3, 4};
+  uint16_t receivearr[2] = {0, 0};
 
   uint16_t *cmd_d = (uint16_t *)&arr;
+  uint16_t *data_d = (uint16_t *)&receivearr;
   std::cout << cmd_d << "\n";
 
   // copy into tx buffer flipping bytes
@@ -100,8 +102,14 @@ int main() {
   std::cout << "rv = " << rv << "\n";
   (void)rv;
 
-  std::cout << rx_buf[0] << "\n";
-  std::cout << rx_buf[1] << "\n";
+  for (int i = 0; i < 2; i++)  // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
+    data_d[i] = (rx_buf[i] >> 8) + ((rx_buf[i] & 0xff) << 8);
+
+  // std::cout << rx_buf[0] << "\n";
+  // std::cout << rx_buf[1] << "\n";
+
+  std::cout << receivearr[0] << "\n";
+  std::cout << receivearr[1] << "\n";
 
   return 0;
 }
