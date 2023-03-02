@@ -102,7 +102,7 @@ int main() {
   std::cout << "rv = " << rv << "\n";
   (void)rv;
 
-  for (int i = 0; i < 2; i++)  // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
+  for (int i = 0; i < 4; i++)  // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
     data_d[i] = (rx_buf[i] >> 8) + ((rx_buf[i] & 0xff) << 8);
 
   // std::cout << rx_buf[0] << "\n";
@@ -110,6 +110,8 @@ int main() {
 
   std::cout << receivearr[0] << "\n";
   std::cout << receivearr[1] << "\n";
+  std::cout << receivearr[2] << "\n";
+  std::cout << receivearr[3] << "\n";
 
   return 0;
 }
