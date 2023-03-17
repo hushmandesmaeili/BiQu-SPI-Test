@@ -434,67 +434,67 @@ void spine_to_spi_biqu(spi_data_t *data, spine_biqu_data_t *spine_data) {
   //          spine_data->checksum);
 }
 
-// /*!
-//  * send receive data and command from spine
-//  */
-// void spi_send_receive(spi_command_t *command, spi_data_t *data) {
-//   // update driver status flag
-//   spi_driver_iterations++;
-//   data->spi_driver_status = spi_driver_iterations << 16;
+/*!
+ * send receive data and command from spine
+ */
+void spi_send_receive(spi_command_t *command, spi_data_t *data) {
+  // // update driver status flag
+  // spi_driver_iterations++;
+  // data->spi_driver_status = spi_driver_iterations << 16;
 
-//   // transmit and receive buffers
-//   uint16_t tx_buf[K_WORDS_PER_MESSAGE];
-//   uint16_t rx_buf[K_WORDS_PER_MESSAGE];
+  // // transmit and receive buffers
+  // uint16_t tx_buf[K_WORDS_PER_MESSAGE];
+  // uint16_t rx_buf[K_WORDS_PER_MESSAGE];
 
-//   for (int spi_board = 0; spi_board < 2; spi_board++) {
-//     // copy command into spine type:
-//     spi_to_spine(command, &g_spine_cmd, spi_board * 2);
+  // for (int spi_board = 0; spi_board < 2; spi_board++) {
+  //   // copy command into spine type:
+  //   spi_to_spine(command, &g_spine_cmd, spi_board * 2);
 
-//     // pointers to command/data spine array
-//     uint16_t *cmd_d = (uint16_t *)&g_spine_cmd;
-//     uint16_t *data_d = (uint16_t *)&g_spine_data;
+  //   // pointers to command/data spine array
+  //   uint16_t *cmd_d = (uint16_t *)&g_spine_cmd;
+  //   uint16_t *data_d = (uint16_t *)&g_spine_data;
 
-//     // zero rx buffer
-//     memset(rx_buf, 0, K_WORDS_PER_MESSAGE * sizeof(uint16_t));
+  //   // zero rx buffer
+  //   memset(rx_buf, 0, K_WORDS_PER_MESSAGE * sizeof(uint16_t));
 
-//     // copy into tx buffer flipping bytes
-//     for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
-//       tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
-//     // tx_buf[i] = __bswap_16(cmd_d[i]);
+  //   // copy into tx buffer flipping bytes
+  //   for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
+  //     tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
+  //   // tx_buf[i] = __bswap_16(cmd_d[i]);
 
-//     // each word is two bytes long
-//     size_t word_len = 2;  // 16 bit word
+  //   // each word is two bytes long
+  //   size_t word_len = 2;  // 16 bit word
 
-//     // spi message struct
-//     struct spi_ioc_transfer spi_message[1];
+  //   // spi message struct
+  //   struct spi_ioc_transfer spi_message[1];
 
-//     // zero message struct.
-//     memset(spi_message, 0, 1 * sizeof(struct spi_ioc_transfer));
+  //   // zero message struct.
+  //   memset(spi_message, 0, 1 * sizeof(struct spi_ioc_transfer));
 
-//     // set up message struct
-//     for (int i = 0; i < 1; i++) {
-//       spi_message[i].bits_per_word = spi_bits_per_word;
-//       spi_message[i].cs_change = 1;
-//       spi_message[i].delay_usecs = 0;
-//       spi_message[i].len = word_len * 66;
-//       spi_message[i].rx_buf = (uint64_t)rx_buf;
-//       spi_message[i].tx_buf = (uint64_t)tx_buf;
-//     }
+  //   // set up message struct
+  //   for (int i = 0; i < 1; i++) {
+  //     spi_message[i].bits_per_word = spi_bits_per_word;
+  //     spi_message[i].cs_change = 1;
+  //     spi_message[i].delay_usecs = 0;
+  //     spi_message[i].len = word_len * 66;
+  //     spi_message[i].rx_buf = (uint64_t)rx_buf;
+  //     spi_message[i].tx_buf = (uint64_t)tx_buf;
+  //   }
 
-//     // do spi communication
-//     int rv = ioctl(spi_board == 0 ? spi_1_fd : spi_2_fd, SPI_IOC_MESSAGE(1),
-//                    &spi_message);
-//     (void)rv;
+  //   // do spi communication
+  //   int rv = ioctl(spi_board == 0 ? spi_1_fd : spi_2_fd, SPI_IOC_MESSAGE(1),
+  //                  &spi_message);
+  //   (void)rv;
 
-//     // flip bytes the other way
-//     for (int i = 0; i < 30; i++)
-//       data_d[i] = (rx_buf[i] >> 8) + ((rx_buf[i] & 0xff) << 8);
-//     // data_d[i] = __bswap_16(rx_buf[i]);
+  //   // flip bytes the other way
+  //   for (int i = 0; i < 30; i++)
+  //     data_d[i] = (rx_buf[i] >> 8) + ((rx_buf[i] & 0xff) << 8);
+  //   // data_d[i] = __bswap_16(rx_buf[i]);
 
-//     // copy back to data
-//     spine_to_spi(data, &g_spine_data, spi_board * 2);
-//   }
-// }
+  //   // copy back to data
+  //   spine_to_spi(data, &g_spine_data, spi_board * 2);
+  // }
+}
 
 /*!
  * send receive data and command from spi for BiQu
