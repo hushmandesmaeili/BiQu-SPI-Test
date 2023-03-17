@@ -88,10 +88,16 @@ int main() {
   for (int i = 0; i < 4; i++)
     tx_buf[i] = reverseBits(cmd_d[i]);//(cmd_d[i] >> 8) + ((cmd_d[i]) << 8);
 
-  std::cout << tx_buf[0] << "\n";
-  std::cout << tx_buf[1] << "\n";
-  std::cout << tx_buf[2] << "\n";
-  std::cout << tx_buf[3] << "\n";
+  std::cout << "Command from Rpi" << "\n";
+  std::cout << arr[0] << "\n";
+  std::cout << arr[1] << "\n";
+  std::cout << arr[2] << "\n";
+  std::cout << arr[3] << "\n";
+
+  // std::cout << tx_buf[0] << "\n";
+  // std::cout << tx_buf[1] << "\n";
+  // std::cout << tx_buf[2] << "\n";
+  // std::cout << tx_buf[3] << "\n";
   
    // spi message struct
   struct spi_ioc_transfer spi_message[1];
@@ -127,18 +133,18 @@ int main() {
 
   // std::cout << rx_buf[0] << "\n";
   // std::cout << rx_buf[1] << "\n";
-  std::cout << "receivearr" << "\n";
+  std::cout << "Array from Teensy: data_d" << "\n";
   std::cout << receivearr[0] << "\n";
   std::cout << receivearr[1] << "\n";
   std::cout << receivearr[2] << "\n";
   std::cout << receivearr[3] << "\n";
 
-  std::cout << "rx_buf" << "\n";
-  std::cout << rx_buf[0] << "\n";
-  std::cout << rx_buf[1] << "\n";
-  std::cout << rx_buf[2] << "\n";
-  std::cout << rx_buf[3] << "\n";
-  std::cout << rx_buf[4] << "\n";
+  // std::cout << "rx_buf" << "\n";
+  // std::cout << rx_buf[0] << "\n";
+  // std::cout << rx_buf[1] << "\n";
+  // std::cout << rx_buf[2] << "\n";
+  // std::cout << rx_buf[3] << "\n";
+  // std::cout << rx_buf[4] << "\n";
 
   return 0;
 }
