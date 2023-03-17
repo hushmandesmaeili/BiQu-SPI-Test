@@ -86,56 +86,56 @@ uint32_t reverseBytes(uint32_t b)
   return b;
 }
 
-// /*!
-//  * Emulate the spi board to estimate the torque.
-//  */
-// void fake_spine_control(spi_command_t *cmd, spi_data_t *data,
-//                         spi_torque_t *torque_out, int board_num) {
-//   torque_out->tau_abad[board_num] =
-//       cmd->kp_abad[board_num] *
-//           (cmd->q_des_abad[board_num] - data->q_abad[board_num]) +
-//       cmd->kd_abad[board_num] *
-//           (cmd->qd_des_abad[board_num] - data->qd_abad[board_num]) +
-//       cmd->tau_abad_ff[board_num];
+/*!
+ * Emulate the spi board to estimate the torque.
+ */
+void fake_spine_control(spi_command_t *cmd, spi_data_t *data,
+                        spi_torque_t *torque_out, int board_num) {
+  // torque_out->tau_abad[board_num] =
+  //     cmd->kp_abad[board_num] *
+  //         (cmd->q_des_abad[board_num] - data->q_abad[board_num]) +
+  //     cmd->kd_abad[board_num] *
+  //         (cmd->qd_des_abad[board_num] - data->qd_abad[board_num]) +
+  //     cmd->tau_abad_ff[board_num];
 
-//   torque_out->tau_hip[board_num] =
-//       cmd->kp_hip[board_num] *
-//           (cmd->q_des_hip[board_num] - data->q_hip[board_num]) +
-//       cmd->kd_hip[board_num] *
-//           (cmd->qd_des_hip[board_num] - data->qd_hip[board_num]) +
-//       cmd->tau_hip_ff[board_num];
+  // torque_out->tau_hip[board_num] =
+  //     cmd->kp_hip[board_num] *
+  //         (cmd->q_des_hip[board_num] - data->q_hip[board_num]) +
+  //     cmd->kd_hip[board_num] *
+  //         (cmd->qd_des_hip[board_num] - data->qd_hip[board_num]) +
+  //     cmd->tau_hip_ff[board_num];
 
-//   torque_out->tau_knee[board_num] =
-//       cmd->kp_knee[board_num] *
-//           (cmd->q_des_knee[board_num] - data->q_knee[board_num]) +
-//       cmd->kd_knee[board_num] *
-//           (cmd->qd_des_knee[board_num] - data->qd_knee[board_num]) +
-//       cmd->tau_knee_ff[board_num];
+  // torque_out->tau_knee[board_num] =
+  //     cmd->kp_knee[board_num] *
+  //         (cmd->q_des_knee[board_num] - data->q_knee[board_num]) +
+  //     cmd->kd_knee[board_num] *
+  //         (cmd->qd_des_knee[board_num] - data->qd_knee[board_num]) +
+  //     cmd->tau_knee_ff[board_num];
 
-//   const float *torque_limits = disabled_torque;
+  // const float *torque_limits = disabled_torque;
 
-//   if (cmd->flags[board_num] & 0b1) {
-//     if (cmd->flags[board_num] & 0b10)
-//       torque_limits = wimp_torque;
-//     else
-//       torque_limits = max_torque;
-//   }
+  // if (cmd->flags[board_num] & 0b1) {
+  //   if (cmd->flags[board_num] & 0b10)
+  //     torque_limits = wimp_torque;
+  //   else
+  //     torque_limits = max_torque;
+  // }
 
-//   if (torque_out->tau_abad[board_num] > torque_limits[0])
-//     torque_out->tau_abad[board_num] = torque_limits[0];
-//   if (torque_out->tau_abad[board_num] < -torque_limits[0])
-//     torque_out->tau_abad[board_num] = -torque_limits[0];
+  // if (torque_out->tau_abad[board_num] > torque_limits[0])
+  //   torque_out->tau_abad[board_num] = torque_limits[0];
+  // if (torque_out->tau_abad[board_num] < -torque_limits[0])
+  //   torque_out->tau_abad[board_num] = -torque_limits[0];
 
-//   if (torque_out->tau_hip[board_num] > torque_limits[1])
-//     torque_out->tau_hip[board_num] = torque_limits[1];
-//   if (torque_out->tau_hip[board_num] < -torque_limits[1])
-//     torque_out->tau_hip[board_num] = -torque_limits[1];
+  // if (torque_out->tau_hip[board_num] > torque_limits[1])
+  //   torque_out->tau_hip[board_num] = torque_limits[1];
+  // if (torque_out->tau_hip[board_num] < -torque_limits[1])
+  //   torque_out->tau_hip[board_num] = -torque_limits[1];
 
-//   if (torque_out->tau_knee[board_num] > torque_limits[2])
-//     torque_out->tau_knee[board_num] = torque_limits[2];
-//   if (torque_out->tau_knee[board_num] < -torque_limits[2])
-//     torque_out->tau_knee[board_num] = -torque_limits[2];
-// }
+  // if (torque_out->tau_knee[board_num] > torque_limits[2])
+  //   torque_out->tau_knee[board_num] = torque_limits[2];
+  // if (torque_out->tau_knee[board_num] < -torque_limits[2])
+  //   torque_out->tau_knee[board_num] = -torque_limits[2];
+}
 
 /*!
  * Initialize SPI
