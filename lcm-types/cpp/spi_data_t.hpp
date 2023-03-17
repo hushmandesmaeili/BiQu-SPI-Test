@@ -129,26 +129,26 @@ int spi_data_t::_encodeNoHash(void *buf, int offset, int maxlen) const
     tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_abad[0], 4);
     if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_hip[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_hip[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_knee[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_knee[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->qd_abad[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->qd_abad[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->qd_hip[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->qd_hip[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->qd_knee[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->qd_knee[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __int32_t_encode_array(buf, offset + pos, maxlen - pos, &this->flags[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __int32_t_encode_array(buf, offset + pos, maxlen - pos, &this->flags[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __int32_t_encode_array(buf, offset + pos, maxlen - pos, &this->spi_driver_status, 1);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __int32_t_encode_array(buf, offset + pos, maxlen - pos, &this->spi_driver_status, 1);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
     return pos;
 }
@@ -160,26 +160,26 @@ int spi_data_t::_decodeNoHash(const void *buf, int offset, int maxlen)
     tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_abad[0], 4);
     if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_hip[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_hip[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_knee[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_knee[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->qd_abad[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->qd_abad[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->qd_hip[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->qd_hip[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->qd_knee[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->qd_knee[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __int32_t_decode_array(buf, offset + pos, maxlen - pos, &this->flags[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __int32_t_decode_array(buf, offset + pos, maxlen - pos, &this->flags[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
-    tlen = __int32_t_decode_array(buf, offset + pos, maxlen - pos, &this->spi_driver_status, 1);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __int32_t_decode_array(buf, offset + pos, maxlen - pos, &this->spi_driver_status, 1);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
     return pos;
 }

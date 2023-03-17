@@ -86,56 +86,56 @@ uint32_t reverseBytes(uint32_t b)
   return b;
 }
 
-/*!
- * Emulate the spi board to estimate the torque.
- */
-void fake_spine_control(spi_command_t *cmd, spi_data_t *data,
-                        spi_torque_t *torque_out, int board_num) {
-  torque_out->tau_abad[board_num] =
-      cmd->kp_abad[board_num] *
-          (cmd->q_des_abad[board_num] - data->q_abad[board_num]) +
-      cmd->kd_abad[board_num] *
-          (cmd->qd_des_abad[board_num] - data->qd_abad[board_num]) +
-      cmd->tau_abad_ff[board_num];
+// /*!
+//  * Emulate the spi board to estimate the torque.
+//  */
+// void fake_spine_control(spi_command_t *cmd, spi_data_t *data,
+//                         spi_torque_t *torque_out, int board_num) {
+//   torque_out->tau_abad[board_num] =
+//       cmd->kp_abad[board_num] *
+//           (cmd->q_des_abad[board_num] - data->q_abad[board_num]) +
+//       cmd->kd_abad[board_num] *
+//           (cmd->qd_des_abad[board_num] - data->qd_abad[board_num]) +
+//       cmd->tau_abad_ff[board_num];
 
-  torque_out->tau_hip[board_num] =
-      cmd->kp_hip[board_num] *
-          (cmd->q_des_hip[board_num] - data->q_hip[board_num]) +
-      cmd->kd_hip[board_num] *
-          (cmd->qd_des_hip[board_num] - data->qd_hip[board_num]) +
-      cmd->tau_hip_ff[board_num];
+//   torque_out->tau_hip[board_num] =
+//       cmd->kp_hip[board_num] *
+//           (cmd->q_des_hip[board_num] - data->q_hip[board_num]) +
+//       cmd->kd_hip[board_num] *
+//           (cmd->qd_des_hip[board_num] - data->qd_hip[board_num]) +
+//       cmd->tau_hip_ff[board_num];
 
-  torque_out->tau_knee[board_num] =
-      cmd->kp_knee[board_num] *
-          (cmd->q_des_knee[board_num] - data->q_knee[board_num]) +
-      cmd->kd_knee[board_num] *
-          (cmd->qd_des_knee[board_num] - data->qd_knee[board_num]) +
-      cmd->tau_knee_ff[board_num];
+//   torque_out->tau_knee[board_num] =
+//       cmd->kp_knee[board_num] *
+//           (cmd->q_des_knee[board_num] - data->q_knee[board_num]) +
+//       cmd->kd_knee[board_num] *
+//           (cmd->qd_des_knee[board_num] - data->qd_knee[board_num]) +
+//       cmd->tau_knee_ff[board_num];
 
-  const float *torque_limits = disabled_torque;
+//   const float *torque_limits = disabled_torque;
 
-  if (cmd->flags[board_num] & 0b1) {
-    if (cmd->flags[board_num] & 0b10)
-      torque_limits = wimp_torque;
-    else
-      torque_limits = max_torque;
-  }
+//   if (cmd->flags[board_num] & 0b1) {
+//     if (cmd->flags[board_num] & 0b10)
+//       torque_limits = wimp_torque;
+//     else
+//       torque_limits = max_torque;
+//   }
 
-  if (torque_out->tau_abad[board_num] > torque_limits[0])
-    torque_out->tau_abad[board_num] = torque_limits[0];
-  if (torque_out->tau_abad[board_num] < -torque_limits[0])
-    torque_out->tau_abad[board_num] = -torque_limits[0];
+//   if (torque_out->tau_abad[board_num] > torque_limits[0])
+//     torque_out->tau_abad[board_num] = torque_limits[0];
+//   if (torque_out->tau_abad[board_num] < -torque_limits[0])
+//     torque_out->tau_abad[board_num] = -torque_limits[0];
 
-  if (torque_out->tau_hip[board_num] > torque_limits[1])
-    torque_out->tau_hip[board_num] = torque_limits[1];
-  if (torque_out->tau_hip[board_num] < -torque_limits[1])
-    torque_out->tau_hip[board_num] = -torque_limits[1];
+//   if (torque_out->tau_hip[board_num] > torque_limits[1])
+//     torque_out->tau_hip[board_num] = torque_limits[1];
+//   if (torque_out->tau_hip[board_num] < -torque_limits[1])
+//     torque_out->tau_hip[board_num] = -torque_limits[1];
 
-  if (torque_out->tau_knee[board_num] > torque_limits[2])
-    torque_out->tau_knee[board_num] = torque_limits[2];
-  if (torque_out->tau_knee[board_num] < -torque_limits[2])
-    torque_out->tau_knee[board_num] = -torque_limits[2];
-}
+//   if (torque_out->tau_knee[board_num] > torque_limits[2])
+//     torque_out->tau_knee[board_num] = torque_limits[2];
+//   if (torque_out->tau_knee[board_num] < -torque_limits[2])
+//     torque_out->tau_knee[board_num] = -torque_limits[2];
+// }
 
 /*!
  * Initialize SPI
@@ -304,38 +304,38 @@ void spi_to_spine(spi_command_t *cmd, spine_cmd_t *spine_cmd, int leg_0) {
     spine_cmd->q_des_abad[i] =
         (cmd->q_des_abad[i + leg_0] * abad_side_sign[i + leg_0]) +
         abad_offset[i + leg_0];
-    spine_cmd->q_des_hip[i] =
-        (cmd->q_des_hip[i + leg_0] * hip_side_sign[i + leg_0]) +
-        hip_offset[i + leg_0];
-    spine_cmd->q_des_knee[i] =
-        (cmd->q_des_knee[i + leg_0] / knee_side_sign[i + leg_0]) +
-        knee_offset[i + leg_0];
+    // spine_cmd->q_des_hip[i] =
+    //     (cmd->q_des_hip[i + leg_0] * hip_side_sign[i + leg_0]) +
+    //     hip_offset[i + leg_0];
+    // spine_cmd->q_des_knee[i] =
+    //     (cmd->q_des_knee[i + leg_0] / knee_side_sign[i + leg_0]) +
+    //     knee_offset[i + leg_0];
 
-    spine_cmd->qd_des_abad[i] =
-        cmd->qd_des_abad[i + leg_0] * abad_side_sign[i + leg_0];
-    spine_cmd->qd_des_hip[i] =
-        cmd->qd_des_hip[i + leg_0] * hip_side_sign[i + leg_0];
-    spine_cmd->qd_des_knee[i] =
-        cmd->qd_des_knee[i + leg_0] / knee_side_sign[i + leg_0];
+    // spine_cmd->qd_des_abad[i] =
+    //     cmd->qd_des_abad[i + leg_0] * abad_side_sign[i + leg_0];
+    // spine_cmd->qd_des_hip[i] =
+    //     cmd->qd_des_hip[i + leg_0] * hip_side_sign[i + leg_0];
+    // spine_cmd->qd_des_knee[i] =
+    //     cmd->qd_des_knee[i + leg_0] / knee_side_sign[i + leg_0];
 
-    spine_cmd->kp_abad[i] = cmd->kp_abad[i + leg_0];
-    spine_cmd->kp_hip[i] = cmd->kp_hip[i + leg_0];
-    spine_cmd->kp_knee[i] = cmd->kp_knee[i + leg_0];
+    // spine_cmd->kp_abad[i] = cmd->kp_abad[i + leg_0];
+    // spine_cmd->kp_hip[i] = cmd->kp_hip[i + leg_0];
+    // spine_cmd->kp_knee[i] = cmd->kp_knee[i + leg_0];
 
-    spine_cmd->kd_abad[i] = cmd->kd_abad[i + leg_0];
-    spine_cmd->kd_hip[i] = cmd->kd_hip[i + leg_0];
-    spine_cmd->kd_knee[i] = cmd->kd_knee[i + leg_0];
+    // spine_cmd->kd_abad[i] = cmd->kd_abad[i + leg_0];
+    // spine_cmd->kd_hip[i] = cmd->kd_hip[i + leg_0];
+    // spine_cmd->kd_knee[i] = cmd->kd_knee[i + leg_0];
 
-    spine_cmd->tau_abad_ff[i] =
-        cmd->tau_abad_ff[i + leg_0] * abad_side_sign[i + leg_0];
-    spine_cmd->tau_hip_ff[i] =
-        cmd->tau_hip_ff[i + leg_0] * hip_side_sign[i + leg_0];
-    spine_cmd->tau_knee_ff[i] =
-        cmd->tau_knee_ff[i + leg_0] * knee_side_sign[i + leg_0];
+    // spine_cmd->tau_abad_ff[i] =
+    //     cmd->tau_abad_ff[i + leg_0] * abad_side_sign[i + leg_0];
+    // spine_cmd->tau_hip_ff[i] =
+    //     cmd->tau_hip_ff[i + leg_0] * hip_side_sign[i + leg_0];
+    // spine_cmd->tau_knee_ff[i] =
+    //     cmd->tau_knee_ff[i + leg_0] * knee_side_sign[i + leg_0];
 
-    spine_cmd->flags[i] = cmd->flags[i + leg_0];
+    // spine_cmd->flags[i] = cmd->flags[i + leg_0];
   }
-  spine_cmd->checksum = xor_checksum((uint32_t *)spine_cmd, 32);
+  // spine_cmd->checksum = xor_checksum((uint32_t *)spine_cmd, 32);
 }
 
 /*!
@@ -387,24 +387,24 @@ void spine_to_spi(spi_data_t *data, spine_data_t *spine_data, int leg_0) {
   for (int i = 0; i < 2; i++) {
     data->q_abad[i + leg_0] = (spine_data->q_abad[i] - abad_offset[i + leg_0]) *
                               abad_side_sign[i + leg_0];
-    data->q_hip[i + leg_0] = (spine_data->q_hip[i] - hip_offset[i + leg_0]) *
-                             hip_side_sign[i + leg_0];
-    data->q_knee[i + leg_0] = (spine_data->q_knee[i] - knee_offset[i + leg_0]) *
-                              knee_side_sign[i + leg_0];
+    // data->q_hip[i + leg_0] = (spine_data->q_hip[i] - hip_offset[i + leg_0]) *
+    //                          hip_side_sign[i + leg_0];
+    // data->q_knee[i + leg_0] = (spine_data->q_knee[i] - knee_offset[i + leg_0]) *
+    //                           knee_side_sign[i + leg_0];
 
-    data->qd_abad[i + leg_0] =
-        spine_data->qd_abad[i] * abad_side_sign[i + leg_0];
-    data->qd_hip[i + leg_0] = spine_data->qd_hip[i] * hip_side_sign[i + leg_0];
-    data->qd_knee[i + leg_0] =
-        spine_data->qd_knee[i] * knee_side_sign[i + leg_0];
+    // data->qd_abad[i + leg_0] =
+    //     spine_data->qd_abad[i] * abad_side_sign[i + leg_0];
+    // data->qd_hip[i + leg_0] = spine_data->qd_hip[i] * hip_side_sign[i + leg_0];
+    // data->qd_knee[i + leg_0] =
+    //     spine_data->qd_knee[i] * knee_side_sign[i + leg_0];
 
-    data->flags[i + leg_0] = spine_data->flags[i];
+    // data->flags[i + leg_0] = spine_data->flags[i];
   }
 
-  uint32_t calc_checksum = xor_checksum((uint32_t *)spine_data, 14);
-  if (calc_checksum != (uint32_t)spine_data->checksum)
-    printf("SPI ERROR BAD CHECKSUM GOT 0x%hx EXPECTED 0x%hx\n", calc_checksum,
-           spine_data->checksum);
+  // uint32_t calc_checksum = xor_checksum((uint32_t *)spine_data, 14);
+  // if (calc_checksum != (uint32_t)spine_data->checksum)
+  //   printf("SPI ERROR BAD CHECKSUM GOT 0x%hx EXPECTED 0x%hx\n", calc_checksum,
+  //          spine_data->checksum);
 }
 
 /*!
