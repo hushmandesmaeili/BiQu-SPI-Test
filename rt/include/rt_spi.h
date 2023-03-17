@@ -34,10 +34,13 @@ extern "C" {
 // #include "../../lcm-types/cpp/spi_data_t.hpp"
 // #include "../../lcm-types/cpp/spi_torque_t.hpp"
 
-#define K_EXPECTED_COMMAND_SIZE 256
+// #define K_EXPECTED_COMMAND_SIZE 256
+#define K_EXPECTED_COMMAND_SIZE 16
 #define K_WORDS_PER_MESSAGE 66
-#define K_EXPECTED_DATA_SIZE 116
-#define K_KNEE_OFFSET_POS 4.35f
+#define K_EXPECTED_DATA_SIZE 16
+// #define K_EXPECTED_DATA_SIZE 116
+// #define K_KNEE_OFFSET_POS 4.35f
+#define K_KNEE_OFFSET_POS 0
 
 #define K_WORDS_PER_MESSAGE_BIQU 130
 
@@ -169,13 +172,13 @@ typedef struct {
  */
 typedef struct {
   float q_abad[4];
-  float q_hip[4];
-  float q_knee[4];
-  float qd_abad[4];
-  float qd_hip[4];
-  float qd_knee[4];
-  int32_t flags[4];
-  int32_t checksum;
+  // float q_hip[4];
+  // float q_knee[4];
+  // float qd_abad[4];
+  // float qd_hip[4];
+  // float qd_knee[4];
+  // int32_t flags[4];
+  // int32_t checksum;
 
 } spine_biqu_data_t;
 
