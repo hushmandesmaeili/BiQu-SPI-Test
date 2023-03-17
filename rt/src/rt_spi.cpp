@@ -502,7 +502,7 @@ void spine_to_spi_biqu(spi_data_t *data, spine_biqu_data_t *spine_data) {
 void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data) {
   // update driver status flag
   spi_driver_iterations++;
-  data->spi_driver_status = spi_driver_iterations << 16;
+  // data->spi_driver_status = spi_driver_iterations << 16;
 
   // transmit and receive buffers
   uint16_t tx_buf[K_WORDS_PER_MESSAGE_BIQU];
@@ -547,7 +547,6 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data) {
                   &spi_message);
   if (rv == 1)
     perror("[ERROR] cannot send message");
-  std::cout << "rv = " << rv << "\n";
   (void)rv;
 
   // flip bytes the other way
