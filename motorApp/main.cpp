@@ -6,7 +6,7 @@
  * driver.
  */
 #include <iostream>
-#include "../rt/include/rt_spi.h"
+#include <rt_spi.h>
 #include"../lcm-types/cpp/spi_command_t.hpp"
 #include "../lcm-types/cpp/spi_data_t.hpp"
 
