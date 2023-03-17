@@ -501,7 +501,7 @@ void spine_to_spi_biqu(spi_data_t *data, spine_biqu_data_t *spine_data) {
  */
 void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data) {
   // update driver status flag
-  spi_driver_iterations++;
+  // spi_driver_iterations++;
   // data->spi_driver_status = spi_driver_iterations << 16;
 
   // transmit and receive buffers
