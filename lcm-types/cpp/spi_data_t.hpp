@@ -14,7 +14,7 @@
 class spi_data_t
 {
     public:
-        float      q_abad[4];
+        int      q_abad[4];
 
         // float      q_hip[4];
 

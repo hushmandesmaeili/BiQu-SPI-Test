@@ -171,7 +171,7 @@ typedef struct {
  * SPI BiQu data message
  */
 typedef struct {
-  float q_abad[4];
+  int q_abad[4];
   // float q_hip[4];
   // float q_knee[4];
   // float qd_abad[4];
