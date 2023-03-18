@@ -52,8 +52,8 @@ int main() {
   // Setup  and Open SPI
   init_spi_biqu();
 
-  spi_command_t *command;
-  spi_data_t *data;
+  spi_command_t *command = new spi_command_t();
+  spi_data_t *data = new spi_data_t();
   spi_biqu_send_receive(command, data);
 
   // uint16_t tx_buf[4];

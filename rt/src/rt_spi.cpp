@@ -26,8 +26,8 @@ int spi_2_fd = -1;
 int spi_open();
 int spi_biqu_open();
 
-static spine_cmd_t g_spine_cmd;
-static spine_data_t g_spine_data;
+// static spine_cmd_t g_spine_cmd;
+// static spine_data_t g_spine_data;
 
 static spine_biqu_cmd_t g_spine_biqu_cmd;
 static spine_biqu_data_t g_spine_biqu_data;
@@ -558,8 +558,9 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data) {
   printf("hi10\n");
 
   // flip bytes the other way
-  for (int i = 0; i < 8; i++)  // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
-    data_d[i] = __bswap_32(reverseBits(rx_buf[i]));
+  for (int i = 0; i < 8; i++) // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
+    data_d[i] = reverseBytes(reverseBits(rx_buf[i]));
+
   // data_d[i] = __bswap_16(rx_buf[i]);
   printf("hi11\n");
 
