@@ -54,10 +54,10 @@ const float disabled_torque[3] = {0.f, 0.f, 0.f};
 //                               -K_KNEE_OFFSET_POS, K_KNEE_OFFSET_POS};
 
 // only used for actual robot
-const float abad_side_sign[4] = {1.f, 1.f, 1.f, 1.f};
+const uint32_t abad_side_sign[4] = {1, 1, 1, 1};
 
 // only used for actual robot
-const float abad_offset[4] = {0.f, 0.f, 0.f, 0.f};
+const uint32_t abad_offset[4] = {0, 0, 0, 0};
 
 /*!
  * Compute SPI message checksum

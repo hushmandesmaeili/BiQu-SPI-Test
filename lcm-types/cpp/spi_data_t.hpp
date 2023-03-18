@@ -14,7 +14,7 @@
 class spi_data_t
 {
     public:
-        int      q_abad[4];
+        uint32_t q_abad[4];
 
         // float      q_hip[4];
 
@@ -126,8 +126,8 @@ int spi_data_t::_encodeNoHash(void *buf, int offset, int maxlen) const
 {
     int pos = 0, tlen;
 
-    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_abad[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_abad[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
     // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_hip[0], 4);
     // if(tlen < 0) return tlen; else pos += tlen;
@@ -157,8 +157,8 @@ int spi_data_t::_decodeNoHash(const void *buf, int offset, int maxlen)
 {
     int pos = 0, tlen;
 
-    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_abad[0], 4);
-    if(tlen < 0) return tlen; else pos += tlen;
+    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_abad[0], 4);
+    // if(tlen < 0) return tlen; else pos += tlen;
 
     // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_hip[0], 4);
     // if(tlen < 0) return tlen; else pos += tlen;
