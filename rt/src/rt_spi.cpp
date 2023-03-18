@@ -533,7 +533,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data) {
 
   // spi message struct
   struct spi_ioc_transfer spi_message[1];
-  printf("hi1\n");6
+  printf("hi6\n");
   // zero message struct.
   memset(spi_message, 0, 1 * sizeof(struct spi_ioc_transfer));
   printf("hi7\n");
