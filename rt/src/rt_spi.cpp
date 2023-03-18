@@ -413,8 +413,7 @@ void spine_to_spi(spi_data_t *data, spine_data_t *spine_data, int leg_0) {
  */
 void spine_to_spi_biqu(spi_data_t *data, spine_biqu_data_t *spine_data) {
   for (int i = 0; i < 4; i++) {
-    data->q_abad[i] = (spine_data->q_abad[i] - abad_offset[i]) *
-                              abad_side_sign[i];
+    data->q_abad[i] = i;
     // data->q_hip[i] = (spine_data->q_hip[i] - hip_offset[i]) *
     //                          hip_side_sign[i];
     // data->q_knee[i] = (spine_data->q_knee[i] - knee_offset[i]) *
@@ -565,6 +564,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data) {
   printf("hi11\n");
 
   // copy back to data
+  // data = g_spine_biqu_data;
   spine_to_spi_biqu(data, &g_spine_biqu_data);
   printf("hi12\n");
 }
