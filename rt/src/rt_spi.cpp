@@ -9,6 +9,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <string.h>
+#include <iostream>
 
 #include <linux/spi/spidev.h>
 #include "rt/include/rt_spi.h"
@@ -503,59 +504,69 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data) {
   // update driver status flag
   // spi_driver_iterations++;
   // data->spi_driver_status = spi_driver_iterations << 16;
-
+  printf("hi1\n");
   // transmit and receive buffers
   uint16_t tx_buf[K_WORDS_PER_MESSAGE_BIQU];
   uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU+2];
 
   // copy command into spine type:
   spi_to_spine_biqu(command, &g_spine_biqu_cmd);
+  printf("hi2\n");
 
   // pointers to command/data spine array
   uint16_t *cmd_d = (uint16_t *)&g_spine_biqu_cmd;
   uint16_t *data_d = (uint16_t *)&g_spine_biqu_data;
+  printf("hi3\n");
 
   // zero rx buffer
   memset(rx_buf, 0, K_WORDS_PER_MESSAGE_BIQU * sizeof(uint16_t));
+  printf("hi4\n");
 
   // copy into tx buffer flipping bytes
   for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
     tx_buf[i] = reverseBits(cmd_d[i]);
   // tx_buf[i] = __bswap_16(cmd_d[i]);
+  printf("hi5\n");
 
   // each word is two bytes long
   size_t word_len = 2;  // 16 bit word
 
   // spi message struct
   struct spi_ioc_transfer spi_message[1];
-
+  printf("hi1\n");6
   // zero message struct.
   memset(spi_message, 0, 1 * sizeof(struct spi_ioc_transfer));
+  printf("hi7\n");
 
   // set up message struct
   for (int i = 0; i < 1; i++) {
     spi_message[i].bits_per_word = spi_bits_per_word;
     spi_message[i].cs_change = 1;
     spi_message[i].delay_usecs = 0;
-    spi_message[i].len = word_len * K_WORDS_PER_MESSAGE_BIQU;
+    spi_message[i].len = 8;
     spi_message[i].rx_buf = (__uint128_t)rx_buf;
     spi_message[i].tx_buf = (__uint128_t)tx_buf;
   }
+  printf("hi8\n");
 
   // do spi communication
   int rv = ioctl(spi_1_fd, SPI_IOC_MESSAGE(1),
                   &spi_message);
+  printf("hi9\n");
   if (rv == 1)
     perror("[ERROR] cannot send message");
   (void)rv;
+  printf("hi10\n");
 
   // flip bytes the other way
-  for (int i = 0; i < 58; i++)  // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
+  for (int i = 0; i < 8; i++)  // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
     data_d[i] = __bswap_32(reverseBits(rx_buf[i]));
   // data_d[i] = __bswap_16(rx_buf[i]);
+  printf("hi11\n");
 
   // copy back to data
   spine_to_spi_biqu(data, &g_spine_biqu_data);
+  printf("hi12\n");
 }
 
 /*!
