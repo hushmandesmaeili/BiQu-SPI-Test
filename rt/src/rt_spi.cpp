@@ -566,16 +566,16 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data) {
 
   // copy back to data
   // data = g_spine_biqu_data;
-  std::cout << g_spine_biqu_data[0] << "\n";
-  std::cout << g_spine_biqu_data[1] << "\n";
-  std::cout << g_spine_biqu_data[2] << "\n";
-  std::cout << g_spine_biqu_data[3] << "\n";
+  std::cout << g_spine_biqu_data.q_abad[0] << "\n";
+  std::cout << g_spine_biqu_data.q_abad[1] << "\n";
+  std::cout << g_spine_biqu_data.q_abad[2] << "\n";
+  std::cout << g_spine_biqu_data.q_abad[3] << "\n";
   spine_to_spi_biqu(data, &g_spine_biqu_data);
   printf("hi12\n");
-  std::cout << g_spine_biqu_data[0] << "\n";
-  std::cout << g_spine_biqu_data[1] << "\n";
-  std::cout << g_spine_biqu_data[2] << "\n";
-  std::cout << g_spine_biqu_data[3] << "\n";
+  std::cout << g_spine_biqu_data.q_abad[0] << "\n";
+  std::cout << g_spine_biqu_data.q_abad[1] << "\n";
+  std::cout << g_spine_biqu_data.q_abad[2] << "\n";
+  std::cout << g_spine_biqu_data.q_abad[3] << "\n";
 }
 
 /*!
