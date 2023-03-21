@@ -521,9 +521,11 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data) {
   memset(rx_buf, 0, K_WORDS_PER_MESSAGE_BIQU * sizeof(uint16_t));
   printf("hi4\n");
 
+  printf("tx_buf below");
   // copy into tx buffer flipping bytes
   for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
     tx_buf[i] = reverseBits(cmd_d[i]);
+    printf(tx_buf[i]);
   // tx_buf[i] = __bswap_16(cmd_d[i]);
   printf("hi5\n");
 
