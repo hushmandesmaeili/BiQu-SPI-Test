@@ -553,13 +553,14 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << "K_WORDS_PER_MESSAGE_BIQU = " << K_WORDS_PER_MESSAGE_BIQU << "\n";
   uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 2];
 
+  uint16_t arr[4] {1,2,3,4};
   // copy command into spine type:  
-  spi_to_spine_biqu(command, &g_spine_biqu_cmd);
-  // g_spine_biqu_cmd and g_spine_biqu_data are declared at the top
+  // spi_to_spine_biqu(command, &g_spine_biqu_cmd); // g_spine_biqu_cmd and g_spine_biqu_data are declared at the top
   printf("hi2\n");
 
   // pointers to command/data spine array
-  uint16_t *cmd_d = (uint16_t *)&g_spine_biqu_cmd; // casting pointer to the address of the command
+  uint16_t *cmd_d = (uint16_t *)&arr;
+  // uint16_t *cmd_d = (uint16_t *)&g_spine_biqu_cmd; // casting pointer to the address of the command
   uint16_t *data_d = (uint16_t *)&g_spine_biqu_data;
   printf("hi3\n");
 
@@ -573,10 +574,15 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // tx_buf[i] = __bswap_16(cmd_d[i]);
   printf("hi5\n");
 
-  std::cout << g_spine_biqu_cmd.q_des_abad[0] << "\n";
-  std::cout << g_spine_biqu_cmd.q_des_abad[1] << "\n";
-  std::cout << g_spine_biqu_cmd.q_des_abad[2] << "\n";
-  std::cout << g_spine_biqu_cmd.q_des_abad[3] << "\n";
+  // std::cout << g_spine_biqu_cmd.q_des_abad[0] << "\n";
+  // std::cout << g_spine_biqu_cmd.q_des_abad[1] << "\n";
+  // std::cout << g_spine_biqu_cmd.q_des_abad[2] << "\n";
+  // std::cout << g_spine_biqu_cmd.q_des_abad[3] << "\n";
+  std::cout << "Command from Rpi" << "\n";
+  std::cout << arr[0] << "\n";
+  std::cout << arr[1] << "\n";
+  std::cout << arr[2] << "\n";
+  std::cout << arr[3] << "\n";
 
   // each word is two bytes long
   size_t word_len = 2; // 16 bit word
@@ -604,7 +610,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   int rv = ioctl(spi_1_fd, SPI_IOC_MESSAGE(1),
                  &spi_message);
   printf("hi9\n");
-  std::cout << "rv = " << K_WORDS_PER_MESSAGE_BIQU << "\n";
+  std::cout << "rv = " << rv << "\n";
   if (rv == 1)
     perror("[ERROR] cannot send message");
   (void)rv;
