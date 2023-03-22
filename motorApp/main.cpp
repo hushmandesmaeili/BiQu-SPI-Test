@@ -9,10 +9,10 @@
 #include <rt_spi.h>
 
 
-unsigned char spi_mode = SPI_MODE_0;
-unsigned char spi_bits_per_word = 8;
-unsigned int spi_speed = 6000000;
-uint8_t lsb = 0x01;
+// unsigned char spi_mode = SPI_MODE_0;
+// unsigned char spi_bits_per_word = 8;
+// unsigned int spi_speed = 6000000;
+// uint8_t lsb = 0x01;
 
 
 uint16_t reverseBits(uint16_t b) {
