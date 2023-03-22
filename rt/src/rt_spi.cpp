@@ -553,14 +553,14 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << "K_WORDS_PER_MESSAGE_BIQU = " << K_WORDS_PER_MESSAGE_BIQU << "\n";
   uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 2];
 
-  uint16_t arr[4] {1,2,3,4};
+  // uint16_t arr[4] {1,2,3,4};
   // copy command into spine type:  
-  // spi_to_spine_biqu(command, &g_spine_biqu_cmd); // g_spine_biqu_cmd and g_spine_biqu_data are declared at the top
+  spi_to_spine_biqu(command, &g_spine_biqu_cmd); // g_spine_biqu_cmd and g_spine_biqu_data are declared at the top
   printf("hi2\n");
 
   // pointers to command/data spine array
-  uint16_t *cmd_d = (uint16_t *)&arr;
-  // uint16_t *cmd_d = (uint16_t *)&g_spine_biqu_cmd; // casting pointer to the address of the command
+  //uint16_t *cmd_d = (uint16_t *)&arr;
+  uint16_t *cmd_d = (uint16_t *)&g_spine_biqu_cmd; // casting pointer to the address of the command
   uint16_t *data_d = (uint16_t *)&g_spine_biqu_data;
   printf("hi3\n");
 
@@ -574,11 +574,12 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // tx_buf[i] = __bswap_16(cmd_d[i]);
   printf("hi5\n");
 
-  // std::cout << g_spine_biqu_cmd.q_des_abad[0] << "\n";
-  // std::cout << g_spine_biqu_cmd.q_des_abad[1] << "\n";
-  // std::cout << g_spine_biqu_cmd.q_des_abad[2] << "\n";
-  // std::cout << g_spine_biqu_cmd.q_des_abad[3] << "\n";
-  std::cout << "Command from Rpi" << "\n";
+  std::cout << "g_spine_biqu_cmd" << "\n";
+  std::cout << g_spine_biqu_cmd.q_des_abad[0] << "\n";
+  std::cout << g_spine_biqu_cmd.q_des_abad[1] << "\n";
+  std::cout << g_spine_biqu_cmd.q_des_abad[2] << "\n";
+  std::cout << g_spine_biqu_cmd.q_des_abad[3] << "\n";
+  std::cout << "tx_buf from Rpi" << "\n";
   std::cout << tx_buf[0] << "\n";
   std::cout << tx_buf[1] << "\n";
   std::cout << tx_buf[2] << "\n";
