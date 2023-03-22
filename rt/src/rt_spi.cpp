@@ -318,6 +318,7 @@ int spi_biqu_open()
   rv = ioctl(spi_1_fd, SPI_IOC_RD_LSB_FIRST, &lsb);
   if (rv < 0)
     perror("[ERROR] ioctl spi_ioc_rd_lsb_first (1)");
+  std::cout << "rv in spi_biqu_open = " << rv << "\n";
   return rv;
 }
 
