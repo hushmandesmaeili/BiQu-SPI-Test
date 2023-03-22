@@ -57,7 +57,7 @@ int main() {
   spi_command_t command;
   command.q_des_abad[0] = 1;
   command.q_des_abad[1] = 0;
-  command.q_des_abad[2] = 0;
+  command.q_des_abad[2] = 1;
   command.q_des_abad[3] = 0;
 
   data.q_abad[0] = 0;
