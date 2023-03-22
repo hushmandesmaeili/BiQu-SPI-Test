@@ -49,7 +49,7 @@ extern "C" {
       (byte & 0x02 ? '1' : '0'), (byte & 0x01 ? '1' : '0')
 
 void init_spi();
-void init_spi_biqu();
+int init_spi_biqu();
 
 void spi_send_receive(spi_command_t* command, spi_data_t* data);
 void spi_biqu_send_receive(spi_command_t* command, spi_data_t* data);

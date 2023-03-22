@@ -148,7 +148,10 @@ void init_spi() {
 /*!
  * Initialize SPI for BiQu
  */
-void init_spi_biqu() {
+int init_spi_biqu() {
+  // return array
+  int temp;
+
   // check sizes:
   size_t command_size = sizeof(spi_command_t);
   size_t data_size = sizeof(spi_data_t);
@@ -172,7 +175,8 @@ void init_spi_biqu() {
     printf("[RT SPI] data size good\n");
 
   printf("[RT SPI] Open\n");
-  spi_biqu_open();
+  temp = spi_biqu_open();
+  return temp;
 }
 
 /*!
@@ -276,7 +280,7 @@ int spi_biqu_open() {
 
   // rv = ioctl(spi_2_fd, SPI_IOC_RD_LSB_FIRST, &lsb);
   // if (rv < 0) perror("[ERROR] ioctl spi_ioc_rd_lsb_first (2)");
-  return rv;
+  return spi_1_fd;
 }
 
 int spi_driver_iterations = 0;
