@@ -377,16 +377,11 @@ void spi_to_spine(spi_command_t *cmd, spine_cmd_t *spine_cmd, int leg_0)
  */
 void spi_to_spine_biqu(spi_command_t *cmd, spine_biqu_cmd_t *spine_cmd)
 {
-
-  // create a fake command
-  cmd->q_des_abad[0] = 1;
-  cmd->q_des_abad[1] = 2;
-  cmd->q_des_abad[2] = 3;
-  cmd->q_des_abad[3] = 4;
+  std::cout << "g_spine_biqu_cmd address" << spine_cmd << "\n";
 
   for (int i = 0; i < 4; i++)
   {
-    cmd->q_des_abad[i] =
+    spine_cmd->q_des_abad[i] =
         (cmd->q_des_abad[i] * abad_side_sign[i]) +
         abad_offset[i];
     //   spine_cmd->q_des_hip[i] =
@@ -556,13 +551,13 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   uint16_t tx_buf[K_WORDS_PER_MESSAGE_BIQU];
   uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 2];
 
-  // copy command into spine type:
-  spine_biqu_cmd_t testSpindCmd;
-  spi_to_spine_biqu(command, &testSpindCmd);
+  // copy command into spine type:  
+  spi_to_spine_biqu(command, &g_spine_biqu_cmd);
+  // g_spine_biqu_cmd and g_spine_biqu_data are declared at the top
   printf("hi2\n");
 
   // pointers to command/data spine array
-  uint16_t *cmd_d = (uint16_t *)&g_spine_biqu_cmd;
+  uint16_t *cmd_d = (uint16_t *)&g_spine_biqu_cmd; // casting pointer to the address of the command
   uint16_t *data_d = (uint16_t *)&g_spine_biqu_data;
   printf("hi3\n");
 
@@ -570,12 +565,16 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   memset(rx_buf, 0, K_WORDS_PER_MESSAGE_BIQU * sizeof(uint16_t));
   printf("hi4\n");
 
-  printf("tx_buf below");
   // copy into tx buffer flipping bytes
   for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
     tx_buf[i] = reverseBits(cmd_d[i]);
   // tx_buf[i] = __bswap_16(cmd_d[i]);
   printf("hi5\n");
+
+  std::cout << g_spine_biqu_cmd.q_des_abad[0] << "\n";
+  std::cout << g_spine_biqu_cmd.q_des_abad[1] << "\n";
+  std::cout << g_spine_biqu_cmd.q_des_abad[2] << "\n";
+  std::cout << g_spine_biqu_cmd.q_des_abad[3] << "\n";
 
   // each word is two bytes long
   size_t word_len = 2; // 16 bit word
