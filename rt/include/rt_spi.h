@@ -66,7 +66,7 @@ spi_command_t* get_spi_command();
 /*!
  * SPI command message
  */
-typedef struct {
+typedef struct { // 33 entries, words per message = 33 * 2 = 66
   float q_des_abad[2];
   float q_des_hip[2];
   float q_des_knee[2];
