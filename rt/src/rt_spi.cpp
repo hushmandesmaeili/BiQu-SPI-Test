@@ -73,7 +73,7 @@ uint32_t xor_checksum(uint32_t *data, size_t len)
   return t;
 }
 
-uint32_t rt_reverseBits(uint32_t b)
+uint32_t reverseBits(uint32_t b)
 {
   b = (b & 0xFFFF0000) >> 16 | (b & 0x0000FFFF) << 16;
   b = (b & 0xFF00FF00) >> 8 | (b & 0x00FF00FF) << 8;
@@ -83,7 +83,7 @@ uint32_t rt_reverseBits(uint32_t b)
   return b;
 }
 
-uint32_t rt_reverseBytes(uint32_t b)
+uint32_t reverseBytes(uint32_t b)
 {
   b = ((b & 0xFF000000) >> 24) | ((b & 0x00FF0000) >> 8) | ((b & 0x0000FF00) << 8) | ((b & 0x000000FF) << 24);
   return b;
@@ -567,7 +567,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
 
   // copy into tx buffer flipping bytes
   for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
-    tx_buf[i] = rt_reverseBits(cmd_d[i]);
+    tx_buf[i] = reverseBits(cmd_d[i]);
   // tx_buf[i] = __bswap_16(cmd_d[i]);
   printf("hi5\n");
 
@@ -609,7 +609,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
 
   // flip bytes the other way
   for (int i = 0; i < 8; i++) // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
-    data_d[i] = rt_reverseBytes(rt_reverseBits(rx_buf[i]));
+    data_d[i] = reverseBytes(reverseBits(rx_buf[i]));
 
   // data_d[i] = __bswap_16(rx_buf[i]);
   printf("hi11\n");

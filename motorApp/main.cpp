@@ -52,33 +52,6 @@ int main() {
   // Setup  and Open SPI
   init_spi_biqu();
 
-
-  // Setup  and Open SPI
-  int rv = 0;
-  int spi_1_fd = open("/dev/spidev0.0", O_RDWR);
-  if (spi_1_fd < 0) perror("[ERROR] Couldn't open spidev 0.0");
-
-  rv = ioctl(spi_1_fd, SPI_IOC_WR_MODE, &spi_mode);
-  if (rv < 0) perror("[ERROR] ioctl spi_ioc_wr_mode (1)");
-
-  rv = ioctl(spi_1_fd, SPI_IOC_RD_MODE, &spi_mode);
-  if (rv < 0) perror("[ERROR] ioctl spi_ioc_rd_mode (1)");
-
-  rv = ioctl(spi_1_fd, SPI_IOC_WR_BITS_PER_WORD, &spi_bits_per_word);
-  if (rv < 0) perror("[ERROR] ioctl spi_ioc_wr_bits_per_word (1)");
-
-  rv = ioctl(spi_1_fd, SPI_IOC_RD_BITS_PER_WORD, &spi_bits_per_word);
-  if (rv < 0) perror("[ERROR] ioctl spi_ioc_rd_bits_per_word (1)");
-
-  rv = ioctl(spi_1_fd, SPI_IOC_WR_MAX_SPEED_HZ, &spi_speed);
-  if (rv < 0) perror("[ERROR] ioctl spi_ioc_wr_max_speed_hz (1)");
-
-  rv = ioctl(spi_1_fd, SPI_IOC_RD_MAX_SPEED_HZ, &spi_speed);
-  if (rv < 0) perror("[ERROR] ioctl spi_ioc_rd_max_speed_hz (1)");
-
-  rv = ioctl(spi_1_fd, SPI_IOC_RD_LSB_FIRST, &lsb);
-  if (rv < 0) perror("[ERROR] ioctl spi_ioc_rd_lsb_first (1)");
-
   // // spi_command_t *command = new spi_command_t();
   // spi_data_t data;
   // spi_command_t command;
