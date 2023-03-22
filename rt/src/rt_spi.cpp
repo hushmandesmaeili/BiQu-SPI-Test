@@ -601,7 +601,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
     spi_message[i].bits_per_word = spi_bits_per_word;
     spi_message[i].cs_change = 1;
     spi_message[i].delay_usecs = 0;
-    spi_message[i].len = word_len * K_WORDS_PER_MESSAGE_BIQU;
+    spi_message[i].len = word_len * K_WORDS_PER_MESSAGE_BIQU; // each message is made up of 2 words
     spi_message[i].rx_buf = (__uint128_t)rx_buf;
     spi_message[i].tx_buf = (__uint128_t)tx_buf;
   }
