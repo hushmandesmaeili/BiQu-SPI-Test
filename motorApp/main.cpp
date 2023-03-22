@@ -15,21 +15,21 @@ unsigned char spi_bits_per_word = 8;
 unsigned int spi_speed = 6000000;
 uint8_t lsb = 0x01;
 
-// uint32_t reverseBits(uint32_t b)
-// {
-//   b = (b & 0xFFFF0000) >> 16 | (b & 0x0000FFFF) << 16;
-//   b = (b & 0xFF00FF00) >> 8  | (b & 0x00FF00FF) << 8;
-//   b = (b & 0xF0F0F0F0) >> 4  | (b & 0x0F0F0F0F) << 4;
-//   b = (b & 0xCCCCCCCC) >> 2  | (b & 0x33333333) << 2;
-//   b = (b & 0xAAAAAAAA) >> 1  | (b & 0x55555555) << 1;
-//   return b;
-// }
+uint32_t reverseBits(uint32_t b)
+{
+  b = (b & 0xFFFF0000) >> 16 | (b & 0x0000FFFF) << 16;
+  b = (b & 0xFF00FF00) >> 8  | (b & 0x00FF00FF) << 8;
+  b = (b & 0xF0F0F0F0) >> 4  | (b & 0x0F0F0F0F) << 4;
+  b = (b & 0xCCCCCCCC) >> 2  | (b & 0x33333333) << 2;
+  b = (b & 0xAAAAAAAA) >> 1  | (b & 0x55555555) << 1;
+  return b;
+}
 
-// uint32_t reverseBytes(uint32_t b)
-// {
-//   b = ((b & 0xFF000000) >> 24) | ((b & 0x00FF0000) >> 8) | ((b & 0x0000FF00) << 8) | ((b & 0x000000FF) << 24);
-//   return b;
-// }
+uint32_t reverseBytes(uint32_t b)
+{
+  b = ((b & 0xFF000000) >> 24) | ((b & 0x00FF0000) >> 8) | ((b & 0x0000FF00) << 8) | ((b & 0x000000FF) << 24);
+  return b;
+}
 
 // runSpi() {
 //   spi_command_t* cmd = get_spi_command();
