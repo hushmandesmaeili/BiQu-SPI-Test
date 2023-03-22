@@ -208,7 +208,8 @@ void init_spi_biqu()
     printf("[RT SPI] data size good\n");
 
   printf("[RT SPI] Open\n");
-  spi_biqu_open();
+  int rv = spi_biqu_open();
+  std::cout << "rv in init_spi_biqu = " << rv << "\n";
 }
 
 /*!
