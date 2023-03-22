@@ -16,7 +16,7 @@ class spi_command_t
     public:
         uint32_t      q_des_abad[4] = {1, 2, 3, 4};
 
-        uint32_t      q_des_hip[4] = {5, 6, 7, 8};
+        // uint32_t      q_des_hip[4] = {5, 6, 7, 8};
 
         // float      q_des_knee[4] = {9, 10, 11, 12};
 
