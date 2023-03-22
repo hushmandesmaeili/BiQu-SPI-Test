@@ -549,7 +549,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   printf("hi1\n");
   // transmit and receive buffers
   uint16_t tx_buf[K_WORDS_PER_MESSAGE_BIQU];
-  printf("K_WORDS_PER_MESSAGE_BIQU = ", K_WORDS_PER_MESSAGE_BIQU);
+  std::cout << "K_WORDS_PER_MESSAGE_BIQU = " << K_WORDS_PER_MESSAGE_BIQU << "\n";
   uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 2];
 
   // copy command into spine type:  
@@ -603,7 +603,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   int rv = ioctl(spi_1_fd, SPI_IOC_MESSAGE(1),
                  &spi_message);
   printf("hi9\n");
-  printf("rv = ", rv);
+  std::cout << "rv = " << K_WORDS_PER_MESSAGE_BIQU << "\n";
   if (rv == 1)
     perror("[ERROR] cannot send message");
   (void)rv;
