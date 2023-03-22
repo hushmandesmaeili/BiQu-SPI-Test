@@ -585,6 +585,10 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << tx_buf[1] << "\n";
   std::cout << tx_buf[2] << "\n";
   std::cout << tx_buf[3] << "\n";
+  std::cout << tx_buf[4] << "\n";
+  std::cout << tx_buf[5] << "\n";
+  std::cout << tx_buf[6] << "\n";
+  std::cout << tx_buf[7] << "\n";
 
   // each word is two bytes long
   size_t word_len = 2; // 16 bit word
