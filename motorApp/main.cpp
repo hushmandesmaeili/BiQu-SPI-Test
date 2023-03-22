@@ -106,7 +106,7 @@ int main() {
 
   // set up message struct
   for (int i = 0; i < 1; i++) {
-    spi_message[i].bits_per_word = spi_bits_per_word;
+    spi_message[i].bits_per_word = 8;
     spi_message[i].cs_change = 1;
     spi_message[i].delay_usecs = 0;
     spi_message[i].len = 8;
