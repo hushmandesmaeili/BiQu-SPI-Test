@@ -73,21 +73,21 @@ uint32_t xor_checksum(uint32_t *data, size_t len)
   return t;
 }
 
-uint32_t reverseBits(uint32_t b)
-{
-  b = (b & 0xFFFF0000) >> 16 | (b & 0x0000FFFF) << 16;
-  b = (b & 0xFF00FF00) >> 8 | (b & 0x00FF00FF) << 8;
-  b = (b & 0xF0F0F0F0) >> 4 | (b & 0x0F0F0F0F) << 4;
-  b = (b & 0xCCCCCCCC) >> 2 | (b & 0x33333333) << 2;
-  b = (b & 0xAAAAAAAA) >> 1 | (b & 0x55555555) << 1;
-  return b;
-}
+// uint32_t reverseBits(uint32_t b)
+// {
+//   b = (b & 0xFFFF0000) >> 16 | (b & 0x0000FFFF) << 16;
+//   b = (b & 0xFF00FF00) >> 8 | (b & 0x00FF00FF) << 8;
+//   b = (b & 0xF0F0F0F0) >> 4 | (b & 0x0F0F0F0F) << 4;
+//   b = (b & 0xCCCCCCCC) >> 2 | (b & 0x33333333) << 2;
+//   b = (b & 0xAAAAAAAA) >> 1 | (b & 0x55555555) << 1;
+//   return b;
+// }
 
-uint32_t reverseBytes(uint32_t b)
-{
-  b = ((b & 0xFF000000) >> 24) | ((b & 0x00FF0000) >> 8) | ((b & 0x0000FF00) << 8) | ((b & 0x000000FF) << 24);
-  return b;
-}
+// uint32_t reverseBytes(uint32_t b)
+// {
+//   b = ((b & 0xFF000000) >> 24) | ((b & 0x00FF0000) >> 8) | ((b & 0x0000FF00) << 8) | ((b & 0x000000FF) << 24);
+//   return b;
+// }
 
 /*!
  * Emulate the spi board to estimate the torque.
