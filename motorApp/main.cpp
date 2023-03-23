@@ -55,10 +55,10 @@ int main() {
   // spi_command_t *command = new spi_command_t();
   spi_data_t data;
   spi_command_t command;
-  command.q_des_abad[0] = 44805;
-  command.q_des_abad[1] = 0;
-  command.q_des_abad[2] = 0;
-  command.q_des_abad[3] = 0;
+  command.q_des_abad[0] = 24.4;
+  command.q_des_abad[1] = 2.4;
+  command.q_des_abad[2] = 3.6;
+  command.q_des_abad[3] = 54.2;
 
   data.q_abad[0] = 0;
   data.q_abad[1] = 0;
