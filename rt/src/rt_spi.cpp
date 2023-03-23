@@ -73,13 +73,21 @@ uint32_t xor_checksum(uint32_t *data, size_t len)
   return t;
 }
 
-uint32_t reverseBits(uint32_t b)
+// uint32_t reverseBits(uint32_t b)
+// {
+//   b = (b & 0xFFFF0000) >> 16 | (b & 0x0000FFFF) << 16;
+//   b = (b & 0xFF00FF00) >> 8 | (b & 0x00FF00FF) << 8;
+//   b = (b & 0xF0F0F0F0) >> 4 | (b & 0x0F0F0F0F) << 4;
+//   b = (b & 0xCCCCCCCC) >> 2 | (b & 0x33333333) << 2;
+//   b = (b & 0xAAAAAAAA) >> 1 | (b & 0x55555555) << 1;
+//   return b;
+// }
+
+uint8_t reverseBits(uint8_t b)
 {
-  b = (b & 0xFFFF0000) >> 16 | (b & 0x0000FFFF) << 16;
-  b = (b & 0xFF00FF00) >> 8 | (b & 0x00FF00FF) << 8;
-  b = (b & 0xF0F0F0F0) >> 4 | (b & 0x0F0F0F0F) << 4;
-  b = (b & 0xCCCCCCCC) >> 2 | (b & 0x33333333) << 2;
-  b = (b & 0xAAAAAAAA) >> 1 | (b & 0x55555555) << 1;
+  b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
+  b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
+  b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
   return b;
 }
 
@@ -555,7 +563,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
 
   float arr[4] = {24.4, 2.4, 3.0, 4.0};
 
-  // copy command into spine type:  
+  // copy command into spine type:
   spi_to_spine_biqu(command, &g_spine_biqu_cmd); // g_spine_biqu_cmd and g_spine_biqu_data are declared at the top
   printf("hi2\n");
 
@@ -572,18 +580,20 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // copy into tx buffer flipping bytes
   for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
     // tx_buf[i] = reverseBits(cmd_d[i]);
-    //tx_buf[i] = cmd_d[i];
+    // tx_buf[i] = cmd_d[i];
     // tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
-    tx_buf[i] = ((cmd_d[i] & 0x00ff) << 8) | ((cmd_d[i] >> 8) & 0x00ff);
-  // tx_buf[i] = __bswap_16(cmd_d[i]);
+      tx_buf[i] = reverseBits((cmd_d[i] >> 8) & 0xff) + reverseBits(cmd_d[i] & 0xff);
+      // tx_buf[i] = __bswap_16(cmd_d[i]);
   printf("hi5\n");
 
-  std::cout << "float: g_spine_biqu_cmd" << "\n";
+  std::cout << "float: g_spine_biqu_cmd"
+            << "\n";
   std::cout << g_spine_biqu_cmd.q_des_abad[0] << "\n";
   std::cout << g_spine_biqu_cmd.q_des_abad[1] << "\n";
   std::cout << g_spine_biqu_cmd.q_des_abad[2] << "\n";
   std::cout << g_spine_biqu_cmd.q_des_abad[3] << "\n";
-  std::cout << "uint16_t: tx_buf from Rpi" << "\n";
+  std::cout << "uint16_t: tx_buf from Rpi"
+            << "\n";
   std::cout << tx_buf[0] << "\n";
   std::cout << tx_buf[1] << "\n";
   std::cout << tx_buf[2] << "\n";
@@ -634,13 +644,14 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
 
   // copy back to data
   // data = g_spine_biqu_data;
-  std::cout << "rx_buf" << "\n";
+  std::cout << "rx_buf"
+            << "\n";
   std::cout << rx_buf[0] << "\n";
   std::cout << rx_buf[1] << "\n";
   std::cout << rx_buf[2] << "\n";
   std::cout << rx_buf[3] << "\n";
   std::cout << rx_buf[4] << "\n";
-  
+
   // std::cout << g_spine_biqu_data.q_abad[0] << "\n";
   // std::cout << g_spine_biqu_data.q_abad[1] << "\n";
   // std::cout << g_spine_biqu_data.q_abad[2] << "\n";
