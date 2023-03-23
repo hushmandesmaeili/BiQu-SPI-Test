@@ -582,7 +582,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
     // tx_buf[i] = reverseBits(cmd_d[i]);
     // tx_buf[i] = cmd_d[i];
     // tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
-      tx_buf[i] = reverseBits((cmd_d[i] >> 8) & 0xff) + reverseBits(cmd_d[i] & 0xff);
+      tx_buf[i] = reverseBits((cmd_d[i] >> 8) & 0x00ff) | reverseBits(cmd_d[i] & 0xff00);
       // tx_buf[i] = __bswap_16(cmd_d[i]);
   printf("hi5\n");
 
