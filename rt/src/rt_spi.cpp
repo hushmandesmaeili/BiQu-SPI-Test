@@ -555,36 +555,25 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // update driver status flag
   // spi_driver_iterations++;
   // data->spi_driver_status = spi_driver_iterations << 16;
-  printf("hi1\n");
+
   // transmit and receive buffers
   uint16_t tx_buf[K_WORDS_PER_MESSAGE_BIQU];
-  std::cout << "K_WORDS_PER_MESSAGE_BIQU = " << K_WORDS_PER_MESSAGE_BIQU << "\n";
   uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 2];
-
-  //float arr[4] = {24.4, 2.4, 3.0, 4.0};
 
   // copy command into spine type:
   spi_to_spine_biqu(command, &g_spine_biqu_cmd); // g_spine_biqu_cmd and g_spine_biqu_data are declared at the top
-  printf("hi2\n");
 
   // pointers to command/data spine array
-  //uint16_t *cmd_d = (uint16_t *)&arr;
   uint16_t *cmd_d = (uint16_t *)&g_spine_biqu_cmd; // casting pointer to the address of the command
   uint16_t *data_d = (uint16_t *)&g_spine_biqu_data;
-  printf("hi3\n");
 
   // zero rx buffer
   memset(rx_buf, 0, K_WORDS_PER_MESSAGE_BIQU * sizeof(uint16_t));
-  printf("hi4\n");
 
   // copy into tx buffer flipping bytes
   for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
-    // tx_buf[i] = reverseBits(cmd_d[i]);
-    // tx_buf[i] = cmd_d[i];
-    // tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
       tx_buf[i] = (reverseBits((cmd_d[i] >> 8) & 0xff) << 8) | reverseBits(cmd_d[i] & 0xff);
-      // tx_buf[i] = __bswap_16(cmd_d[i]);
-  printf("hi5\n");
+
 
   std::cout << "float: g_spine_biqu_cmd"
             << "\n";
@@ -592,26 +581,15 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << g_spine_biqu_cmd.q_des_abad[1] << "\n";
   std::cout << g_spine_biqu_cmd.q_des_abad[2] << "\n";
   std::cout << g_spine_biqu_cmd.q_des_abad[3] << "\n";
-  std::cout << "uint16_t: tx_buf from Rpi"
-            << "\n";
-  std::cout << tx_buf[0] << "\n";
-  std::cout << tx_buf[1] << "\n";
-  std::cout << tx_buf[2] << "\n";
-  std::cout << tx_buf[3] << "\n";
-  std::cout << tx_buf[4] << "\n";
-  std::cout << tx_buf[5] << "\n";
-  std::cout << tx_buf[6] << "\n";
-  std::cout << tx_buf[7] << "\n";
 
   // each word is two bytes long
   size_t word_len = 2; // 16 bit word
 
   // spi message struct
   struct spi_ioc_transfer spi_message[1];
-  printf("hi6\n");
+
   // zero message struct.
   memset(spi_message, 0, 1 * sizeof(struct spi_ioc_transfer));
-  printf("hi7\n");
 
   // set up message struct
   for (int i = 0; i < 1; i++)
@@ -623,24 +601,18 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
     spi_message[i].rx_buf = (__uint128_t)rx_buf;
     spi_message[i].tx_buf = (__uint128_t)tx_buf;
   }
-  printf("hi8\n");
 
   // do spi communication
   int rv = ioctl(spi_1_fd, SPI_IOC_MESSAGE(1),
                  &spi_message);
-  printf("hi9\n");
-  std::cout << "rv = " << rv << "\n";
   if (rv == 1)
     perror("[ERROR] cannot send message");
   (void)rv;
-  printf("hi10\n");
 
   // flip bytes the other way
   for (int i = 0; i < 8; i++) // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
     data_d[i] = reverseBytes(reverseBits(rx_buf[i]));
 
-  // data_d[i] = __bswap_16(rx_buf[i]);
-  printf("hi11\n");
 
   // copy back to data
   // data = g_spine_biqu_data;
