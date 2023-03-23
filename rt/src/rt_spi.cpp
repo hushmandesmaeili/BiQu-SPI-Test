@@ -553,7 +553,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << "K_WORDS_PER_MESSAGE_BIQU = " << K_WORDS_PER_MESSAGE_BIQU << "\n";
   uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 2];
 
-  float arr[4] = {24.4, 2.0, 3.0, 4.0};
+  float arr[4] = {24.4, 2.4, 3.0, 4.0};
 
   // copy command into spine type:  
   spi_to_spine_biqu(command, &g_spine_biqu_cmd); // g_spine_biqu_cmd and g_spine_biqu_data are declared at the top
