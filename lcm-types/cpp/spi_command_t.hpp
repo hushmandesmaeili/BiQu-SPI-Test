@@ -44,7 +44,7 @@ class spi_command_t
 
         float      tau_knee_ff[4] = {57, 58, 59, 60};
 
-        int32_t    flags[4] = {61, 62, 63, 64};
+        float    flags[4] = {61, 62, 63, 64};
 
     public:
         /**
