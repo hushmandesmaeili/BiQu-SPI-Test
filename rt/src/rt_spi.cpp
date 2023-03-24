@@ -616,19 +616,19 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // copy back to data
   // data = g_spine_biqu_data;
   std::cout << "uint16_t: rx_buf" << "\n";
-  std::cout << rx_buf[0] << "\n";
-  std::cout << rx_buf[1] << "\n";
-  std::cout << rx_buf[2] << "\n";
-  std::cout << rx_buf[3] << "\n";
-  std::cout << rx_buf[4] << "\n";
-  std::cout << rx_buf[5] << "\n";
-  std::cout << rx_buf[6] << "\n";
-  std::cout << rx_buf[7] << "\n";
-  std::cout << rx_buf[8] << "\n";
-  std::cout << rx_buf[9] << "\n";
-  std::cout << rx_buf[10] << "\n";
-  std::cout << rx_buf[11] << "\n";
-  
+  std::cout << "rx_buf[0]: " << rx_buf[0] << "\n";
+  std::cout << "rx_buf[1]: "<< rx_buf[1] << "\n";
+  std::cout << "rx_buf[2]: "<< rx_buf[2] << "\n";
+  std::cout << "rx_buf[3]: "<< rx_buf[3] << "\n";
+  std::cout << "rx_buf[4]: "<< rx_buf[4] << "\n";
+  std::cout << "rx_buf[5]: "<< rx_buf[5] << "\n";
+  std::cout << "rx_buf[6]: "<< rx_buf[6] << "\n";
+  std::cout << "rx_buf[7]: "<< rx_buf[7] << "\n";
+  std::cout << "rx_buf[8]: "<< rx_buf[8] << "\n";
+  std::cout << "rx_buf[9]: "<< rx_buf[9] << "\n";
+  std::cout << "rx_buf[10]: "<< rx_buf[10] << "\n";
+  std::cout << "rx_buf[11]: "<< rx_buf[11] << "\n";
+
   // std::cout << g_spine_biqu_data.q_abad[0] << "\n";
   // std::cout << g_spine_biqu_data.q_abad[1] << "\n";
   // std::cout << g_spine_biqu_data.q_abad[2] << "\n";
