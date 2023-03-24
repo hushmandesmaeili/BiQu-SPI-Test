@@ -386,8 +386,6 @@ void spi_to_spine(spi_command_t *cmd, spine_cmd_t *spine_cmd, int leg_0)
  */
 void spi_to_spine_biqu(spi_command_t *cmd, spine_biqu_cmd_t *spine_cmd)
 {
-  std::cout << "g_spine_biqu_cmd address" << spine_cmd << "\n";
-
   for (int i = 0; i < 4; i++)
   {
     spine_cmd->q_des_abad[i] =
@@ -463,7 +461,8 @@ void spine_to_spi_biqu(spi_data_t *data, spine_biqu_data_t *spine_data)
 {
   for (int i = 0; i < 4; i++)
   {
-    data->q_abad[i] = i;
+    data->q_abad[i] = spine_data->q_abad[i];
+    
     // data->q_hip[i] = (spine_data->q_hip[i] - hip_offset[i]) *
     //                          hip_side_sign[i];
     // data->q_knee[i] = (spine_data->q_knee[i] - knee_offset[i]) *
@@ -628,12 +627,12 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // std::cout << g_spine_biqu_data.q_abad[1] << "\n";
   // std::cout << g_spine_biqu_data.q_abad[2] << "\n";
   // std::cout << g_spine_biqu_data.q_abad[3] << "\n";
-  // spine_to_spi_biqu(data, &g_spine_biqu_data);
+  spine_to_spi_biqu(data, &g_spine_biqu_data);
   // printf("hi12\n");
-  // std::cout << g_spine_biqu_data.q_abad[0] << "\n";
-  // std::cout << g_spine_biqu_data.q_abad[1] << "\n";
-  // std::cout << g_spine_biqu_data.q_abad[2] << "\n";
-  // std::cout << g_spine_biqu_data.q_abad[3] << "\n";
+  std::cout << g_spine_biqu_data.q_abad[0] << "\n";
+  std::cout << g_spine_biqu_data.q_abad[1] << "\n";
+  std::cout << g_spine_biqu_data.q_abad[2] << "\n";
+  std::cout << g_spine_biqu_data.q_abad[3] << "\n";
 }
 
 /*!
