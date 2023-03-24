@@ -131,6 +131,11 @@ int main()
   command.tau_knee_ff[2] = 59.7;
   command.tau_knee_ff[3] = 60.8;
 
+  command.flags[0] = 61.9;
+  command.flags[1] = 62.0;
+  command.flags[2] = 63.1;
+  command.flags[3] = 64.2;
+
   data.q_abad[0] = 0;
   data.q_abad[1] = 0;
   data.q_abad[2] = 0;
