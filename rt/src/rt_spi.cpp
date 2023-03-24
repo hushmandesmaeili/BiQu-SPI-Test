@@ -625,7 +625,10 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << rx_buf[6] << "\n";
   std::cout << rx_buf[7] << "\n";
   std::cout << rx_buf[8] << "\n";
-
+  std::cout << rx_buf[9] << "\n";
+  std::cout << rx_buf[10] << "\n";
+  std::cout << rx_buf[11] << "\n";
+  
   // std::cout << g_spine_biqu_data.q_abad[0] << "\n";
   // std::cout << g_spine_biqu_data.q_abad[1] << "\n";
   // std::cout << g_spine_biqu_data.q_abad[2] << "\n";
