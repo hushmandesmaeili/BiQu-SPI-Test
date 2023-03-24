@@ -610,7 +610,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   (void)rv;
 
   // flip bytes the other way
-  for (int i = 0; i < 8; i++) // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
+  for (int i = 0; i < 12; i++) // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
     data_d[i] = reverseBytes(reverseBits(rx_buf[i]));
 
 
@@ -630,10 +630,20 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << "rx_buf[10]: "<< rx_buf[10] << "\n";
   std::cout << "rx_buf[11]: "<< rx_buf[11] << "\n";
 
-  // std::cout << g_spine_biqu_data.q_abad[0] << "\n";
-  // std::cout << g_spine_biqu_data.q_abad[1] << "\n";
-  // std::cout << g_spine_biqu_data.q_abad[2] << "\n";
-  // std::cout << g_spine_biqu_data.q_abad[3] << "\n";
+  std::cout << "data_d" << "\n";
+  std::cout << "data_d[0]: " << data_d[0] << "\n";
+  std::cout << "data_d[1]: "<< data_d[1] << "\n";
+  std::cout << "data_d[2]: "<< data_d[2] << "\n";
+  std::cout << "data_d[3]: "<< data_d[3] << "\n";
+  std::cout << "data_d[4]: "<< data_d[4] << "\n";
+  std::cout << "data_d[5]: "<< data_d[5] << "\n";
+  std::cout << "data_d[6]: "<< data_d[6] << "\n";
+  std::cout << "data_d[7]: "<< data_d[7] << "\n";
+  std::cout << "data_d[8]: "<< data_d[8] << "\n";
+  std::cout << "data_d[9]: "<< data_d[9] << "\n";
+  std::cout << "data_d[10]: "<< data_d[10] << "\n";
+  std::cout << "data_d[11]: "<< data_d[11] << "\n";
+
   spine_to_spi_biqu(data, &g_spine_biqu_data);
   std::cout << "float: g_spine_biqu_data" << "\n";
   std::cout << g_spine_biqu_data.q_abad[0] << "\n";
