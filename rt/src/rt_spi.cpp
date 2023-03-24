@@ -53,14 +53,16 @@ const float disabled_torque[3] = {0.f, 0.f, 0.f};
 // const float knee_offset[4] = {K_KNEE_OFFSET_POS, -K_KNEE_OFFSET_POS,
 //                               -K_KNEE_OFFSET_POS, K_KNEE_OFFSET_POS};
 
-// only used for actual robot
+// TODO-biqu: testing numbers
 const float abad_side_sign[4] = {1, 1, 1, 1};
 const float hip_side_sign[4] = {-1.f, 1.f, -1.f, 1.f};
+const float knee_side_sign[4] = {1, 1, 1, 1};
 
-// only used for actual robot
+// TODO-biqu: testing numbers
 const float abad_offset[4] = {0, 0, 0, 0};
-// const float hip_offset[4] = {M_PI / 2.f, -M_PI / 2.f, -M_PI / 2.f, M_PI / 2.f};
 const float hip_offset[4] = {0, 0, 0, 0};
+const float knee_offset[4] = {0, 0, 0, 0};
+
 
 /*!
  * Compute SPI message checksum
@@ -397,33 +399,33 @@ void spi_to_spine_biqu(spi_command_t *cmd, spine_biqu_cmd_t *spine_cmd)
     spine_cmd->q_des_hip[i] =
         (cmd->q_des_hip[i] * hip_side_sign[i]) +
         hip_offset[i];
-    //   spine_cmd->q_des_knee[i] =
-    //       (cmd->q_des_knee[i] / knee_side_sign[i]) +
-    //       knee_offset[i];
+      spine_cmd->q_des_knee[i] =
+          (cmd->q_des_knee[i] / knee_side_sign[i]) +
+          knee_offset[i];
 
-    //   spine_cmd->qd_des_abad[i] =
-    //       cmd->qd_des_abad[i] * abad_side_sign[i];
-    //   spine_cmd->qd_des_hip[i] =
-    //       cmd->qd_des_hip[i] * hip_side_sign[i];
-    //   spine_cmd->qd_des_knee[i] =
-    //       cmd->qd_des_knee[i] / knee_side_sign[i];
+      spine_cmd->qd_des_abad[i] =
+          cmd->qd_des_abad[i] * abad_side_sign[i];
+      spine_cmd->qd_des_hip[i] =
+          cmd->qd_des_hip[i] * hip_side_sign[i];
+      spine_cmd->qd_des_knee[i] =
+          cmd->qd_des_knee[i] / knee_side_sign[i];
 
-    //   spine_cmd->kp_abad[i] = cmd->kp_abad[i];
-    //   spine_cmd->kp_hip[i] = cmd->kp_hip[i];
-    //   spine_cmd->kp_knee[i] = cmd->kp_knee[i];
+      spine_cmd->kp_abad[i] = cmd->kp_abad[i];
+      spine_cmd->kp_hip[i] = cmd->kp_hip[i];
+      spine_cmd->kp_knee[i] = cmd->kp_knee[i];
 
-    //   spine_cmd->kd_abad[i] = cmd->kd_abad[i];
-    //   spine_cmd->kd_hip[i] = cmd->kd_hip[i];
-    //   spine_cmd->kd_knee[i] = cmd->kd_knee[i];
+      spine_cmd->kd_abad[i] = cmd->kd_abad[i];
+      spine_cmd->kd_hip[i] = cmd->kd_hip[i];
+      spine_cmd->kd_knee[i] = cmd->kd_knee[i];
 
-    //   spine_cmd->tau_abad_ff[i] =
-    //       cmd->tau_abad_ff[i] * abad_side_sign[i];
-    //   spine_cmd->tau_hip_ff[i] =
-    //       cmd->tau_hip_ff[i] * hip_side_sign[i];
-    //   spine_cmd->tau_knee_ff[i] =
-    //       cmd->tau_knee_ff[i] * knee_side_sign[i];
+      spine_cmd->tau_abad_ff[i] =
+          cmd->tau_abad_ff[i] * abad_side_sign[i];
+      spine_cmd->tau_hip_ff[i] =
+          cmd->tau_hip_ff[i] * hip_side_sign[i];
+      spine_cmd->tau_knee_ff[i] =
+          cmd->tau_knee_ff[i] * knee_side_sign[i];
 
-    //   spine_cmd->flags[i] = cmd->flags[i];
+      spine_cmd->flags[i] = cmd->flags[i];
   }
   // spine_cmd->checksum = xor_checksum((uint32_t *)spine_cmd, 64);
 }
