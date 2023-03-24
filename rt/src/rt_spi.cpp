@@ -54,10 +54,13 @@ const float disabled_torque[3] = {0.f, 0.f, 0.f};
 //                               -K_KNEE_OFFSET_POS, K_KNEE_OFFSET_POS};
 
 // only used for actual robot
-const uint32_t abad_side_sign[4] = {1, 1, 1, 1};
+const float abad_side_sign[4] = {1, 1, 1, 1};
+const float hip_side_sign[4] = {-1.f, 1.f, -1.f, 1.f};
 
 // only used for actual robot
-const uint32_t abad_offset[4] = {0, 0, 0, 0};
+const float abad_offset[4] = {0, 0, 0, 0};
+// const float hip_offset[4] = {M_PI / 2.f, -M_PI / 2.f, -M_PI / 2.f, M_PI / 2.f};
+const float hip_offset[4] = {0, 0, 0, 0};
 
 /*!
  * Compute SPI message checksum
@@ -391,9 +394,9 @@ void spi_to_spine_biqu(spi_command_t *cmd, spine_biqu_cmd_t *spine_cmd)
     spine_cmd->q_des_abad[i] =
         (cmd->q_des_abad[i] * abad_side_sign[i]) +
         abad_offset[i];
-    //   spine_cmd->q_des_hip[i] =
-    //       (cmd->q_des_hip[i] * hip_side_sign[i]) +
-    //       hip_offset[i];
+    spine_cmd->q_des_hip[i] =
+        (cmd->q_des_hip[i] * hip_side_sign[i]) +
+        hip_offset[i];
     //   spine_cmd->q_des_knee[i] =
     //       (cmd->q_des_knee[i] / knee_side_sign[i]) +
     //       knee_offset[i];
@@ -462,7 +465,7 @@ void spine_to_spi_biqu(spi_data_t *data, spine_biqu_data_t *spine_data)
   for (int i = 0; i < 4; i++)
   {
     data->q_abad[i] = spine_data->q_abad[i];
-    
+
     // data->q_hip[i] = (spine_data->q_hip[i] - hip_offset[i]) *
     //                          hip_side_sign[i];
     // data->q_knee[i] = (spine_data->q_knee[i] - knee_offset[i]) *
@@ -572,8 +575,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
 
   // copy into tx buffer flipping bytes
   for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
-      tx_buf[i] = (reverseBits((cmd_d[i] >> 8) & 0xff) << 8) | reverseBits(cmd_d[i] & 0xff);
-
+    tx_buf[i] = (reverseBits((cmd_d[i] >> 8) & 0xff) << 8) | reverseBits(cmd_d[i] & 0xff);
 
   std::cout << "float: g_spine_biqu_cmd"
             << "\n";
@@ -614,7 +616,6 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
     // data_d[i] = reverseBytes(reverseBits(rx_buf[i]));
     data_d[i] = (reverseBits((rx_buf[i] >> 8) & 0xff) << 8) | reverseBits(rx_buf[i] & 0xff);
 
-
   // // copy back to data
   // // data = g_spine_biqu_data;
   // std::cout << "uint16_t: rx_buf" << "\n";
@@ -631,22 +632,24 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // std::cout << "rx_buf[10]: "<< rx_buf[10] << "\n";
   // std::cout << "rx_buf[11]: "<< rx_buf[11] << "\n";
 
-  std::cout << "data_d" << "\n";
+  std::cout << "data_d"
+            << "\n";
   std::cout << "data_d[0]: " << data_d[0] << "\n";
-  std::cout << "data_d[1]: "<< data_d[1] << "\n";
-  std::cout << "data_d[2]: "<< data_d[2] << "\n";
-  std::cout << "data_d[3]: "<< data_d[3] << "\n";
-  std::cout << "data_d[4]: "<< data_d[4] << "\n";
-  std::cout << "data_d[5]: "<< data_d[5] << "\n";
-  std::cout << "data_d[6]: "<< data_d[6] << "\n";
-  std::cout << "data_d[7]: "<< data_d[7] << "\n";
-  std::cout << "data_d[8]: "<< data_d[8] << "\n";
-  std::cout << "data_d[9]: "<< data_d[9] << "\n";
-  std::cout << "data_d[10]: "<< data_d[10] << "\n";
-  std::cout << "data_d[11]: "<< data_d[11] << "\n";
+  std::cout << "data_d[1]: " << data_d[1] << "\n";
+  std::cout << "data_d[2]: " << data_d[2] << "\n";
+  std::cout << "data_d[3]: " << data_d[3] << "\n";
+  std::cout << "data_d[4]: " << data_d[4] << "\n";
+  std::cout << "data_d[5]: " << data_d[5] << "\n";
+  std::cout << "data_d[6]: " << data_d[6] << "\n";
+  std::cout << "data_d[7]: " << data_d[7] << "\n";
+  std::cout << "data_d[8]: " << data_d[8] << "\n";
+  std::cout << "data_d[9]: " << data_d[9] << "\n";
+  std::cout << "data_d[10]: " << data_d[10] << "\n";
+  std::cout << "data_d[11]: " << data_d[11] << "\n";
 
   spine_to_spi_biqu(data, &g_spine_biqu_data);
-  std::cout << "float: g_spine_biqu_data" << "\n";
+  std::cout << "float: g_spine_biqu_data"
+            << "\n";
   std::cout << g_spine_biqu_data.q_abad[0] << "\n";
   std::cout << g_spine_biqu_data.q_abad[1] << "\n";
   std::cout << g_spine_biqu_data.q_abad[2] << "\n";

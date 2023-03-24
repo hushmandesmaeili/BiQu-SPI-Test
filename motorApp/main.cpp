@@ -60,6 +60,11 @@ int main() {
   command.q_des_abad[2] = 3.6;
   command.q_des_abad[3] = 54.2;
 
+  command.q_des_hip[0] = 32.4;
+  command.q_des_hip[1] = 65.4;
+  command.q_des_hip[2] = 12.4;
+  command.q_des_hip[3] = 4.1;
+
   data.q_abad[0] = 0;
   data.q_abad[1] = 0;
   data.q_abad[2] = 0;
