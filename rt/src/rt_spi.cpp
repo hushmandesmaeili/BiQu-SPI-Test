@@ -557,7 +557,8 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
 
   // transmit and receive buffers
   uint16_t tx_buf[K_WORDS_PER_MESSAGE_BIQU];
-  uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 2];
+  // uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 2];
+  uint16_t rx_buf[12];
 
   // copy command into spine type:
   spi_to_spine_biqu(command, &g_spine_biqu_cmd); // g_spine_biqu_cmd and g_spine_biqu_data are declared at the top
