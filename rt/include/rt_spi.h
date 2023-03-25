@@ -42,7 +42,7 @@ extern "C" {
 // #define K_KNEE_OFFSET_POS 4.35f
 #define K_KNEE_OFFSET_POS 0
 
-#define K_WORDS_PER_MESSAGE_BIQU 130 
+#define K_WORDS_PER_MESSAGE_BIQU 132
 
 #define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
 #define BYTE_TO_BINARY(byte)                                \
