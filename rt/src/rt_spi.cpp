@@ -426,7 +426,7 @@ void spi_to_spine_biqu(spi_command_t *cmd, spine_biqu_cmd_t *spine_cmd)
 
     spine_cmd->flags[i] = cmd->flags[i];
   }
-  // spine_cmd->checksum = xor_checksum((uint32_t *)spine_cmd, 64);
+  spine_cmd->checksum = xor_checksum((uint32_t *)spine_cmd, 64);
 }
 
 /*!

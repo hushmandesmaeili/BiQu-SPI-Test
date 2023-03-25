@@ -163,8 +163,9 @@ typedef struct {
   float tau_hip_ff[4];
   float tau_knee_ff[4];
   // int32_t flags[4];
+  // int32_t checksum;
   float flags[4];
-  int32_t checksum;
+  float checksum;
 
 } spine_biqu_cmd_t;
 
