@@ -578,12 +578,19 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // copy into tx buffer flipping bytes
   for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
     tx_buf[i] = (reverseBits((cmd_d[i] >> 8) & 0xff) << 8) | reverseBits(cmd_d[i] & 0xff);
+  std::cout << "cmd_i[0]"
+            << "\n";
+  std::cout << std::hex << cmd_d[0] << "\n";
+  std::cout << std::hex << cmd_d[1] << "\n";
+  std::cout << std::hex << cmd_d[2] << "\n";
+  std::cout << std::hex << cmd_d[3] << "\n";
+  
   std::cout << "tx_buf[0]"
             << "\n";
-  std::cout << tx_buf[0] << "\n";
-  std::cout << tx_buf[1] << "\n";
-  std::cout << tx_buf[2] << "\n";
-  std::cout << tx_buf[3] << "\n";
+  std::cout << std::hex << tx_buf[0] << "\n";
+  std::cout << std::hex << tx_buf[1] << "\n";
+  std::cout << std::hex << tx_buf[2] << "\n";
+  std::cout << std::hex << tx_buf[3] << "\n";
 
   std::cout << "float: g_spine_biqu_cmd"
             << "\n";
