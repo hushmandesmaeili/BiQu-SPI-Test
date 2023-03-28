@@ -623,9 +623,6 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
     spi_message[i].rx_buf = (uint64_t)rx_buf;
     spi_message[i].tx_buf = (uint64_t)tx_buf;
   }
-  std::cout << "spi_message[0].tx_buf[0]"
-            << "\n";
-  std::cout << std::hex << spi_message[0].tx_buf[0] << "\n";
 
   // do spi communication
   int rv = ioctl(spi_1_fd, SPI_IOC_MESSAGE(1),
