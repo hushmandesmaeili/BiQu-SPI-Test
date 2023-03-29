@@ -579,8 +579,10 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
   //   tx_buf[i] = (reverseBits((cmd_d[i] >> 8) & 0xff) << 8) | reverseBits(cmd_d[i] & 0xff);
 
-  for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
-      tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
+  // for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
+  //     tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
+   for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
+      tx_buf[i] = cmd_d[i];
   std::cout << "cmd_i[0]"
             << "\n";
   std::cout << std::hex << cmd_d[0] << "\n";
