@@ -563,7 +563,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // transmit and receive buffers
   uint16_t tx_buf[K_WORDS_PER_MESSAGE_BIQU];
   // uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 2];
-  uint16_t rx_buf[12];
+  uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU];
 
   // copy command into spine type:
   spi_to_spine_biqu(command, &g_spine_biqu_cmd); // g_spine_biqu_cmd and g_spine_biqu_data are declared at the top
@@ -582,8 +582,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
       tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
   //  for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
-  //     tx_buf[i] = cmd_d[i];
-  std::cout << "cmd_i[0]"
+  std::cout << "cmd_d[0]"
             << "\n";
   std::cout << std::hex << cmd_d[0] << "\n";
   std::cout << std::hex << cmd_d[1] << "\n";
@@ -637,7 +636,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // for (int i = 0; i < 12; i++) // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
     // data_d[i] = reverseBytes(reverseBits(rx_buf[i]));
     // data_d[i] = (reverseBits((rx_buf[i] >> 8) & 0xff) << 8) | reverseBits(rx_buf[i] & 0xff);
-    for (int i = 0; i < 30; i++)
+    for (int i = 0; i < 58; i++)
       data_d[i] = (rx_buf[i] >> 8) + ((rx_buf[i] & 0xff) << 8);
 
   // // copy back to data
