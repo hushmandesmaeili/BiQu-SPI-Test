@@ -634,9 +634,11 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   (void)rv;
 
   // flip bytes the other way
-  for (int i = 0; i < 12; i++) // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
+  // for (int i = 0; i < 12; i++) // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
     // data_d[i] = reverseBytes(reverseBits(rx_buf[i]));
-    data_d[i] = (reverseBits((rx_buf[i] >> 8) & 0xff) << 8) | reverseBits(rx_buf[i] & 0xff);
+    // data_d[i] = (reverseBits((rx_buf[i] >> 8) & 0xff) << 8) | reverseBits(rx_buf[i] & 0xff);
+    for (int i = 0; i < 30; i++)
+      data_d[i] = (rx_buf[i] >> 8) + ((rx_buf[i] & 0xff) << 8);
 
   // // copy back to data
   // // data = g_spine_biqu_data;
