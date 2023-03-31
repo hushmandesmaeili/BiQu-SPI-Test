@@ -467,6 +467,7 @@ void spine_to_spi_biqu(spi_data_t *data, spine_biqu_data_t *spine_data)
   for (int i = 0; i < 4; i++)
   {
     data->q_abad[i] = spine_data->q_abad[i];
+    data->q_hip[i] = spine_data->q_hip[i];  // JUST FOR TEST, ADD OFFSETS
 
     // data->q_hip[i] = (spine_data->q_hip[i] - hip_offset[i]) *
     //                          hip_side_sign[i];
@@ -677,6 +678,10 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << g_spine_biqu_data.q_abad[1] << "\n";
   std::cout << g_spine_biqu_data.q_abad[2] << "\n";
   std::cout << g_spine_biqu_data.q_abad[3] << "\n";
+  std::cout << g_spine_biqu_data.q_hip[0] << "\n";
+  std::cout << g_spine_biqu_data.q_hip[1] << "\n";
+  std::cout << g_spine_biqu_data.q_hip[2] << "\n";
+  std::cout << g_spine_biqu_data.q_hip[3] << "\n";
 }
 
 /*!

@@ -16,7 +16,7 @@ class spi_data_t
     public:
         uint32_t q_abad[4];
 
-        // float      q_hip[4];
+        float      q_hip[4];
 
         // float      q_knee[4];
 
