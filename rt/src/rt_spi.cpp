@@ -643,7 +643,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // // copy back to data
   // // data = g_spine_biqu_data;
   std::cout << "uint16_t: rx_buf" << "\n";
-  std::cout << "rx_buf[0]: " << rx_buf[0] << "\n";
+  std::cout << "rx_buf[0]: "<< rx_buf[0] << "\n";
   std::cout << "rx_buf[1]: "<< rx_buf[1] << "\n";
   std::cout << "rx_buf[2]: "<< rx_buf[2] << "\n";
   std::cout << "rx_buf[3]: "<< rx_buf[3] << "\n";
@@ -674,14 +674,14 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   spine_to_spi_biqu(data, &g_spine_biqu_data);
   std::cout << "float: g_spine_biqu_data"
             << "\n";
-  std::cout << g_spine_biqu_data.q_abad[0] << "\n";
-  std::cout << g_spine_biqu_data.q_abad[1] << "\n";
-  std::cout << g_spine_biqu_data.q_abad[2] << "\n";
-  std::cout << g_spine_biqu_data.q_abad[3] << "\n";
-  std::cout << g_spine_biqu_data.q_hip[0] << "\n";
-  std::cout << g_spine_biqu_data.q_hip[1] << "\n";
-  std::cout << g_spine_biqu_data.q_hip[2] << "\n";
-  std::cout << g_spine_biqu_data.q_hip[3] << "\n";
+  std::cout << std::hex <<  g_spine_biqu_data.q_abad[0] << "\n";
+  std::cout << std::hex << g_spine_biqu_data.q_abad[1] << "\n";
+  std::cout << std::hex << g_spine_biqu_data.q_abad[2] << "\n";
+  std::cout << std::hex << g_spine_biqu_data.q_abad[3] << "\n";
+  std::cout << std::hex << g_spine_biqu_data.q_hip[0] << "\n";
+  std::cout << std::hex << g_spine_biqu_data.q_hip[1] << "\n";
+  std::cout << std::hex << g_spine_biqu_data.q_hip[2] << "\n";
+  std::cout << std::hex << g_spine_biqu_data.q_hip[3] << "\n";
 }
 
 /*!
