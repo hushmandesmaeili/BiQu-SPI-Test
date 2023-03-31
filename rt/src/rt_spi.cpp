@@ -469,24 +469,24 @@ void spine_to_spi_biqu(spi_data_t *data, spine_biqu_data_t *spine_data)
     data->q_abad[i] = spine_data->q_abad[i];
     data->q_hip[i] = spine_data->q_hip[i];  // JUST FOR TEST, ADD OFFSETS
 
-    // data->q_hip[i] = (spine_data->q_hip[i] - hip_offset[i]) *
-    //                          hip_side_sign[i];
-    // data->q_knee[i] = (spine_data->q_knee[i] - knee_offset[i]) *
-    //                           knee_side_sign[i];
+    data->q_hip[i] = (spine_data->q_hip[i] - hip_offset[i]) *
+                             hip_side_sign[i];
+    data->q_knee[i] = (spine_data->q_knee[i] - knee_offset[i]) *
+                              knee_side_sign[i];
 
-    // data->qd_abad[i] =
-    //     spine_data->qd_abad[i] * abad_side_sign[i];
-    // data->qd_hip[i] = spine_data->qd_hip[i] * hip_side_sign[i];
-    // data->qd_knee[i] =
-    //     spine_data->qd_knee[i] * knee_side_sign[i];
+    data->qd_abad[i] =
+        spine_data->qd_abad[i] * abad_side_sign[i];
+    data->qd_hip[i] = spine_data->qd_hip[i] * hip_side_sign[i];
+    data->qd_knee[i] =
+        spine_data->qd_knee[i] * knee_side_sign[i];
 
-    // data->flags[i] = spine_data->flags[i];
+    data->flags[i] = spine_data->flags[i];
   }
 
-  // uint32_t calc_checksum = xor_checksum((uint32_t *)spine_data, 28);
-  // if (calc_checksum != (uint32_t)spine_data->checksum)
-  //   printf("SPI ERROR BAD CHECKSUM GOT 0x%hx EXPECTED 0x%hx\n", calc_checksum,
-  //          spine_data->checksum);
+  uint32_t calc_checksum = xor_checksum((uint32_t *)spine_data, 28);
+  if (calc_checksum != (uint32_t)spine_data->checksum)
+    printf("SPI ERROR BAD CHECKSUM GOT 0x%hx EXPECTED 0x%hx\n", calc_checksum,
+           spine_data->checksum);
 }
 
 /*!

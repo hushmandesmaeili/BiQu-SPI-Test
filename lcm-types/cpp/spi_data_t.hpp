@@ -18,17 +18,17 @@ class spi_data_t
 
         float      q_hip[4];
 
-        // float      q_knee[4];
+        float      q_knee[4];
 
-        // float      qd_abad[4];
+        float      qd_abad[4];
 
-        // float      qd_hip[4];
+        float      qd_hip[4];
 
-        // float      qd_knee[4];
+        float      qd_knee[4];
 
-        // int32_t    flags[4];
+        int32_t    flags[4];
 
-        // int32_t spi_driver_status;
+        int32_t spi_driver_status;
 
     public:
         /**

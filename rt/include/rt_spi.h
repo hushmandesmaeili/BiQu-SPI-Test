@@ -162,10 +162,8 @@ typedef struct {
   float tau_abad_ff[4];
   float tau_hip_ff[4];
   float tau_knee_ff[4];
-  // int32_t flags[4];
-  // int32_t checksum;
-  float flags[4];
-  float checksum;
+  int32_t flags[4];
+  int32_t checksum;
 
 } spine_biqu_cmd_t;
 
@@ -173,14 +171,14 @@ typedef struct {
  * SPI BiQu data message
  */
 typedef struct {
-  int q_abad[4];
+  float q_abad[4];
   float q_hip[4];
-  // float q_knee[4];
-  // float qd_abad[4];
-  // float qd_hip[4];
-  // float qd_knee[4];
-  // int32_t flags[4];
-  // int32_t checksum;
+  float q_knee[4];
+  float qd_abad[4];
+  float qd_hip[4];
+  float qd_knee[4];
+  int32_t flags[4];
+  int32_t checksum;
 
 } spine_biqu_data_t;
 
