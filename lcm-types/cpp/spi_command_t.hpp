@@ -44,7 +44,7 @@ class spi_command_t
 
         float      tau_knee_ff[4] = {57, 58, 59, 60};
 
-        float    flags[4] = {61, 62, 63, 64};
+        int32_t    flags[4] = {61, 62, 63, 64};
 
     public:
         /**
@@ -142,53 +142,53 @@ int spi_command_t::_encodeNoHash(void *buf, int offset, int maxlen) const
 {
     int pos = 0, tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_des_abad[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_des_abad[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_des_hip[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_des_hip[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_des_knee[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->q_des_knee[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->qd_des_abad[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->qd_des_abad[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->qd_des_hip[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->qd_des_hip[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->qd_des_knee[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->qd_des_knee[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->kp_abad[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->kp_abad[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->kp_hip[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->kp_hip[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->kp_knee[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->kp_knee[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->kd_abad[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->kd_abad[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->kd_hip[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->kd_hip[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->kd_knee[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->kd_knee[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->tau_abad_ff[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->tau_abad_ff[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->tau_hip_ff[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->tau_hip_ff[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->tau_knee_ff[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_encode_array(buf, offset + pos, maxlen - pos, &this->tau_knee_ff[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __int32_t_encode_array(buf, offset + pos, maxlen - pos, &this->flags[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __int32_t_encode_array(buf, offset + pos, maxlen - pos, &this->flags[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
     return pos;
 }
@@ -197,53 +197,53 @@ int spi_command_t::_decodeNoHash(const void *buf, int offset, int maxlen)
 {
     int pos = 0, tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_des_abad[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_des_abad[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_des_hip[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_des_hip[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_des_knee[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->q_des_knee[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->qd_des_abad[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->qd_des_abad[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->qd_des_hip[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->qd_des_hip[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->qd_des_knee[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->qd_des_knee[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->kp_abad[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->kp_abad[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->kp_hip[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->kp_hip[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->kp_knee[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->kp_knee[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->kd_abad[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->kd_abad[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->kd_hip[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->kd_hip[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->kd_knee[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->kd_knee[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->tau_abad_ff[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->tau_abad_ff[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->tau_hip_ff[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->tau_hip_ff[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->tau_knee_ff[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __float_decode_array(buf, offset + pos, maxlen - pos, &this->tau_knee_ff[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
-    // tlen = __int32_t_decode_array(buf, offset + pos, maxlen - pos, &this->flags[0], 4);
-    // if(tlen < 0) return tlen; else pos += tlen;
+    tlen = __int32_t_decode_array(buf, offset + pos, maxlen - pos, &this->flags[0], 4);
+    if(tlen < 0) return tlen; else pos += tlen;
 
     return pos;
 }
