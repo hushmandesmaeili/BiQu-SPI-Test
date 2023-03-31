@@ -34,13 +34,13 @@ extern "C" {
 // #include "../../lcm-types/cpp/spi_data_t.hpp"
 // #include "../../lcm-types/cpp/spi_torque_t.hpp"
 
-// #define K_EXPECTED_COMMAND_SIZE 256
-#define K_EXPECTED_COMMAND_SIZE 16
+#define K_EXPECTED_COMMAND_SIZE 256
+// #define K_EXPECTED_COMMAND_SIZE 16
 #define K_WORDS_PER_MESSAGE 66
-#define K_EXPECTED_DATA_SIZE 16
-// #define K_EXPECTED_DATA_SIZE 116
-// #define K_KNEE_OFFSET_POS 4.35f
-#define K_KNEE_OFFSET_POS 0
+// #define K_EXPECTED_DATA_SIZE 16
+#define K_EXPECTED_DATA_SIZE 116
+#define K_KNEE_OFFSET_POS 4.35f
+// #define K_KNEE_OFFSET_POS 0
 
 #define K_WORDS_PER_MESSAGE_BIQU 132
 
