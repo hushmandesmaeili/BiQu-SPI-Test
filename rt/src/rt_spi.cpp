@@ -580,6 +580,8 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
   //   tx_buf[i] = (reverseBits((cmd_d[i] >> 8) & 0xff) << 8) | reverseBits(cmd_d[i] & 0xff);
 
+  std::cout << "/***************TRANSMIT DEBUG***************/" << "\n";
+
   for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
       tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
   //  for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
@@ -639,6 +641,8 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
     // data_d[i] = (reverseBits((rx_buf[i] >> 8) & 0xff) << 8) | reverseBits(rx_buf[i] & 0xff);
     for (int i = 0; i < 58; i++)
       data_d[i] = (rx_buf[i] >> 8) + ((rx_buf[i] & 0xff) << 8);
+
+  std::cout << "/***************RECEIVE DEBUG***************/" << "\n";
 
   // // copy back to data
   // // data = g_spine_biqu_data;
