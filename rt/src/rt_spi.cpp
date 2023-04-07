@@ -583,26 +583,63 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
       tx_buf[i+1] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
 
-  std::cout << "cmd_d[0:3]"
-            << "\n";
-  std::cout << std::hex << cmd_d[0] << "\n";
-  std::cout << std::hex << cmd_d[1] << "\n";
-  std::cout << std::hex << cmd_d[2] << "\n";
-  std::cout << std::hex << cmd_d[3] << "\n";
+  // std::cout << "cmd_d[0:3]"
+  //           << "\n";
+  // std::cout << std::hex << cmd_d[0] << "\n";
+  // std::cout << std::hex << cmd_d[1] << "\n";
+  // std::cout << std::hex << cmd_d[2] << "\n";
+  // std::cout << std::hex << cmd_d[3] << "\n";
   
   std::cout << "tx_buf[1:4]"
             << "\n";
-  std::cout << std::hex << tx_buf[1] << "\n";
-  std::cout << std::hex << tx_buf[2] << "\n";
-  std::cout << std::hex << tx_buf[3] << "\n";
-  std::cout << std::hex << tx_buf[4] << "\n";
+  std::cout << "tx_buf[1]" << std::hex << tx_buf[1] << "\n";
+  std::cout << "tx_buf[2]" << std::hex << tx_buf[2] << "\n";
+  std::cout << "tx_buf[3]" << std::hex << tx_buf[3] << "\n";
+  std::cout << "tx_buf[4]" << std::hex << tx_buf[4] << "\n";
+  std::cout << "tx_buf[5]" << std::hex << tx_buf[5] << "\n";
+  std::cout << "tx_buf[6]" << std::hex << tx_buf[6] << "\n";
+  std::cout << "tx_buf[7]" << std::hex << tx_buf[7] << "\n";
+  std::cout << "tx_buf[8]" << std::hex << tx_buf[8] << "\n";
+  std::cout << "tx_buf[9]" << std::hex << tx_buf[9] << "\n";
+  std::cout << "tx_buf[10]" << std::hex << tx_buf[10] << "\n";
+  std::cout << "tx_buf[11]" << std::hex << tx_buf[11] << "\n";
+  std::cout << "tx_buf[12]" << std::hex << tx_buf[12] << "\n";
+  std::cout << "tx_buf[13]" << std::hex << tx_buf[13] << "\n";
+  std::cout << "tx_buf[14]" << std::hex << tx_buf[14] << "\n";
+  std::cout << "tx_buf[15]" << std::hex << tx_buf[15] << "\n";
+  std::cout << "tx_buf[16]" << std::hex << tx_buf[16] << "\n";
+  std::cout << "tx_buf[17]" << std::hex << tx_buf[17] << "\n";
+  std::cout << "tx_buf[18]" << std::hex << tx_buf[18] << "\n";
+  std::cout << "tx_buf[19]" << std::hex << tx_buf[19] << "\n";
 
-  std::cout << "float: g_spine_biqu_cmd"
-            << "\n";
-  std::cout << g_spine_biqu_cmd.q_des_abad[0] << "\n";
-  std::cout << g_spine_biqu_cmd.q_des_abad[1] << "\n";
-  std::cout << g_spine_biqu_cmd.q_des_abad[2] << "\n";
-  std::cout << g_spine_biqu_cmd.q_des_abad[3] << "\n";
+  std::cout << "tx_buf[20]" << std::hex << tx_buf[20] << "\n";
+  std::cout << "tx_buf[21]" << std::hex << tx_buf[21] << "\n";
+  std::cout << "tx_buf[22]" << std::hex << tx_buf[22] << "\n";
+  std::cout << "tx_buf[23]" << std::hex << tx_buf[23] << "\n";
+  std::cout << "tx_buf[24]" << std::hex << tx_buf[24] << "\n";
+  std::cout << "tx_buf[25]" << std::hex << tx_buf[25] << "\n";
+  std::cout << "tx_buf[26]" << std::hex << tx_buf[26] << "\n";
+  std::cout << "tx_buf[27]" << std::hex << tx_buf[27] << "\n";
+  std::cout << "tx_buf[28]" << std::hex << tx_buf[28] << "\n";
+  std::cout << "tx_buf[29]" << std::hex << tx_buf[29] << "\n";
+  std::cout << "tx_buf[30]" << std::hex << tx_buf[30] << "\n";
+  std::cout << "tx_buf[31]" << std::hex << tx_buf[31] << "\n";
+  std::cout << "tx_buf[32]" << std::hex << tx_buf[32] << "\n";
+  std::cout << "tx_buf[33]" << std::hex << tx_buf[33] << "\n";
+  std::cout << "tx_buf[34]" << std::hex << tx_buf[34] << "\n";
+  std::cout << "tx_buf[35]" << std::hex << tx_buf[35] << "\n";
+  std::cout << "tx_buf[36]" << std::hex << tx_buf[36] << "\n";
+  std::cout << "tx_buf[37]" << std::hex << tx_buf[37] << "\n";
+  std::cout << "tx_buf[38]" << std::hex << tx_buf[38] << "\n";
+  std::cout << "tx_buf[39]" << std::hex << tx_buf[39] << "\n";
+  std::cout << "tx_buf[40]" << std::hex << tx_buf[40] << "\n";
+
+  // std::cout << "float: g_spine_biqu_cmd"
+  //           << "\n";
+  // std::cout << g_spine_biqu_cmd.q_des_abad[0] << "\n";
+  // std::cout << g_spine_biqu_cmd.q_des_abad[1] << "\n";
+  // std::cout << g_spine_biqu_cmd.q_des_abad[2] << "\n";
+  // std::cout << g_spine_biqu_cmd.q_des_abad[3] << "\n";
 
   // each word is two bytes long
   size_t word_len = 2; // 16 bit word
@@ -641,11 +678,11 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
 
   // // copy back to data
   // // data = g_spine_biqu_data;
-  std::cout << "uint16_t: rx_buf" << "\n";
-  std::cout << "rx_buf[0]: "<< rx_buf[0] << "\n";
-  std::cout << "rx_buf[1]: "<< rx_buf[1] << "\n";
-  std::cout << "rx_buf[2]: "<< rx_buf[2] << "\n";
-  std::cout << "rx_buf[3]: "<< rx_buf[3] << "\n";
+  // std::cout << "uint16_t: rx_buf" << "\n";
+  // std::cout << "rx_buf[0]: "<< rx_buf[0] << "\n";
+  // std::cout << "rx_buf[1]: "<< rx_buf[1] << "\n";
+  // std::cout << "rx_buf[2]: "<< rx_buf[2] << "\n";
+  // std::cout << "rx_buf[3]: "<< rx_buf[3] << "\n";
   // std::cout << "rx_buf[4]: "<< rx_buf[4] << "\n";
   // std::cout << "rx_buf[5]: "<< rx_buf[5] << "\n";
   // std::cout << "rx_buf[6]: "<< rx_buf[6] << "\n";
@@ -656,12 +693,12 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // std::cout << "rx_buf[11]: "<< rx_buf[11] << "\n";
   // std::cout << "rx_buf[12]: "<< rx_buf[12] << "\n";
 
-  std::cout << "data_d"
-            << "\n";
-  std::cout << "data_d[0]: " << data_d[0] << "\n";
-  std::cout << "data_d[1]: " << data_d[1] << "\n";
-  std::cout << "data_d[2]: " << data_d[2] << "\n";
-  std::cout << "data_d[3]: " << data_d[3] << "\n";
+  // std::cout << "data_d"
+  //           << "\n";
+  // std::cout << "data_d[0]: " << data_d[0] << "\n";
+  // std::cout << "data_d[1]: " << data_d[1] << "\n";
+  // std::cout << "data_d[2]: " << data_d[2] << "\n";
+  // std::cout << "data_d[3]: " << data_d[3] << "\n";
   // std::cout << "data_d[4]: " << data_d[4] << "\n";
   // std::cout << "data_d[5]: " << data_d[5] << "\n";
   // std::cout << "data_d[6]: " << data_d[6] << "\n";
@@ -672,39 +709,40 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // std::cout << "data_d[11]: " << data_d[11] << "\n";
 
   spine_to_spi_biqu(data, &g_spine_biqu_data);
-  std::cout << "float: g_spine_biqu_data"
-            << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_abad[0] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_abad[1] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_abad[2] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_abad[3] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_hip[0] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_hip[1] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_hip[2] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_hip[3] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_knee[0] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_knee[1] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_knee[2] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_knee[3] << "\n";
 
-  std::cout << g_spine_biqu_data.qd_abad[0] << "\n";
-  std::cout << g_spine_biqu_data.qd_abad[1] << "\n";
-  std::cout << g_spine_biqu_data.qd_abad[2] << "\n";
-  std::cout << g_spine_biqu_data.qd_abad[3] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_hip[0] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_hip[1] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_hip[2] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_hip[3] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_knee[0] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_knee[1] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_knee[2] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_knee[3] << "\n";
+  // std::cout << "float: g_spine_biqu_data"
+  //           << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_abad[0] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_abad[1] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_abad[2] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_abad[3] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_hip[0] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_hip[1] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_hip[2] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_hip[3] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_knee[0] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_knee[1] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_knee[2] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_knee[3] << "\n";
 
-  std::cout << std::hex << g_spine_biqu_data.flags[0] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.flags[1] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.flags[2] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.flags[3] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.checksum << "\n";
+  // std::cout << g_spine_biqu_data.qd_abad[0] << "\n";
+  // std::cout << g_spine_biqu_data.qd_abad[1] << "\n";
+  // std::cout << g_spine_biqu_data.qd_abad[2] << "\n";
+  // std::cout << g_spine_biqu_data.qd_abad[3] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_hip[0] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_hip[1] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_hip[2] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_hip[3] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_knee[0] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_knee[1] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_knee[2] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_knee[3] << "\n";
+
+  // std::cout << std::hex << g_spine_biqu_data.flags[0] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.flags[1] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.flags[2] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.flags[3] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.checksum << "\n";
 }
 
 /*!
