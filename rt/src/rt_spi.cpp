@@ -585,21 +585,28 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
 
   std::cout << "cmd_d[]"
             << "\n";
-  std::cout << std::hex << cmd_d[65] << "\n";
-  std::cout << std::hex << cmd_d[66] << "\n";
-  std::cout << std::hex << cmd_d[67] << "\n";
-  std::cout << std::hex << cmd_d[68] << "\n";
-  std::cout << std::hex << cmd_d[67] << "\n";
-  std::cout << std::hex << cmd_d[68] << "\n";
-  std::cout << std::hex << cmd_d[69] << "\n";
-  std::cout << std::hex << cmd_d[70] << "\n";
+  std::cout << "cmd_d[1]" << std::hex << cmd_d[1] << "\n";
+  std::cout << "cmd_d[2]" << std::hex << cmd_d[2] << "\n";
+  std::cout << "cmd_d[3]" << std::hex << cmd_d[3] << "\n";
+  std::cout << "cmd_d[4]" << std::hex << cmd_d[4] << "\n";
+  
+  std::cout << "cmd_d[61]" << std::hex << cmd_d[61] << "\n";
+  std::cout << "cmd_d[62]" << std::hex << cmd_d[62] << "\n";
+  std::cout << "cmd_d[63]" << std::hex << cmd_d[63] << "\n";
+  std::cout << "cmd_d[64]" << std::hex << cmd_d[64] << "\n";
+  std::cout << "cmd_d[65]" << std::hex << cmd_d[65] << "\n";
+  std::cout << "cmd_d[66]" << std::hex << cmd_d[66] << "\n";
+  std::cout << "cmd_d[67]" << std::hex << cmd_d[67] << "\n";
+  std::cout << "cmd_d[68]" << std::hex << cmd_d[68] << "\n";
+  std::cout << "cmd_d[69]" << std::hex << cmd_d[69] << "\n";
+  std::cout << "cmd_d[70]" << std::hex << cmd_d[70] << "\n";
   
   std::cout << "tx_buf[]"
             << "\n";
-  // std::cout << "tx_buf[1]" << std::hex << tx_buf[1] << "\n";
-  // std::cout << "tx_buf[2]" << std::hex << tx_buf[2] << "\n";
-  // std::cout << "tx_buf[3]" << std::hex << tx_buf[3] << "\n";
-  // std::cout << "tx_buf[4]" << std::hex << tx_buf[4] << "\n";
+  std::cout << "tx_buf[1]" << std::hex << tx_buf[1] << "\n";
+  std::cout << "tx_buf[2]" << std::hex << tx_buf[2] << "\n";
+  std::cout << "tx_buf[3]" << std::hex << tx_buf[3] << "\n";
+  std::cout << "tx_buf[4]" << std::hex << tx_buf[4] << "\n";
   // std::cout << "tx_buf[5]" << std::hex << tx_buf[5] << "\n";
   // std::cout << "tx_buf[6]" << std::hex << tx_buf[6] << "\n";
   // std::cout << "tx_buf[7]" << std::hex << tx_buf[7] << "\n";
