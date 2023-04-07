@@ -583,12 +583,16 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
       tx_buf[i+1] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
 
-  // std::cout << "cmd_d[0:3]"
-  //           << "\n";
-  // std::cout << std::hex << cmd_d[0] << "\n";
-  // std::cout << std::hex << cmd_d[1] << "\n";
-  // std::cout << std::hex << cmd_d[2] << "\n";
-  // std::cout << std::hex << cmd_d[3] << "\n";
+  std::cout << "cmd_d[0:3]"
+            << "\n";
+  std::cout << std::hex << cmd_d[65] << "\n";
+  std::cout << std::hex << cmd_d[66] << "\n";
+  std::cout << std::hex << cmd_d[67] << "\n";
+  std::cout << std::hex << cmd_d[68] << "\n";
+  std::cout << std::hex << cmd_d[67] << "\n";
+  std::cout << std::hex << cmd_d[68] << "\n";
+  std::cout << std::hex << cmd_d[69] << "\n";
+  std::cout << std::hex << cmd_d[70] << "\n";
   
   std::cout << "tx_buf[1:4]"
             << "\n";
@@ -633,6 +637,17 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << "tx_buf[38]" << std::hex << tx_buf[38] << "\n";
   std::cout << "tx_buf[39]" << std::hex << tx_buf[39] << "\n";
   std::cout << "tx_buf[40]" << std::hex << tx_buf[40] << "\n";
+
+  std::cout << "tx_buf[61]" << std::hex << tx_buf[61] << "\n";
+  std::cout << "tx_buf[62]" << std::hex << tx_buf[62] << "\n";
+  std::cout << "tx_buf[63]" << std::hex << tx_buf[63] << "\n";
+  std::cout << "tx_buf[64]" << std::hex << tx_buf[64] << "\n";
+  std::cout << "tx_buf[65]" << std::hex << tx_buf[65] << "\n";
+  std::cout << "tx_buf[66]" << std::hex << tx_buf[66] << "\n";
+  std::cout << "tx_buf[67]" << std::hex << tx_buf[67] << "\n";
+  std::cout << "tx_buf[68]" << std::hex << tx_buf[68] << "\n";
+  std::cout << "tx_buf[69]" << std::hex << tx_buf[69] << "\n";
+  std::cout << "tx_buf[70]" << std::hex << tx_buf[70] << "\n";
 
   std::cout << "tx_buf[124]" << std::hex << tx_buf[124] << "\n";
   std::cout << "tx_buf[125]" << std::hex << tx_buf[125] << "\n";
