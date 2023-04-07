@@ -583,7 +583,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
       tx_buf[i+1] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
 
-  std::cout << "cmd_d[0:3]"
+  std::cout << "cmd_d[]"
             << "\n";
   std::cout << std::hex << cmd_d[65] << "\n";
   std::cout << std::hex << cmd_d[66] << "\n";
@@ -594,49 +594,49 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << std::hex << cmd_d[69] << "\n";
   std::cout << std::hex << cmd_d[70] << "\n";
   
-  std::cout << "tx_buf[1:4]"
+  std::cout << "tx_buf[]"
             << "\n";
-  std::cout << "tx_buf[1]" << std::hex << tx_buf[1] << "\n";
-  std::cout << "tx_buf[2]" << std::hex << tx_buf[2] << "\n";
-  std::cout << "tx_buf[3]" << std::hex << tx_buf[3] << "\n";
-  std::cout << "tx_buf[4]" << std::hex << tx_buf[4] << "\n";
-  std::cout << "tx_buf[5]" << std::hex << tx_buf[5] << "\n";
-  std::cout << "tx_buf[6]" << std::hex << tx_buf[6] << "\n";
-  std::cout << "tx_buf[7]" << std::hex << tx_buf[7] << "\n";
-  std::cout << "tx_buf[8]" << std::hex << tx_buf[8] << "\n";
-  std::cout << "tx_buf[9]" << std::hex << tx_buf[9] << "\n";
-  std::cout << "tx_buf[10]" << std::hex << tx_buf[10] << "\n";
-  std::cout << "tx_buf[11]" << std::hex << tx_buf[11] << "\n";
-  std::cout << "tx_buf[12]" << std::hex << tx_buf[12] << "\n";
-  std::cout << "tx_buf[13]" << std::hex << tx_buf[13] << "\n";
-  std::cout << "tx_buf[14]" << std::hex << tx_buf[14] << "\n";
-  std::cout << "tx_buf[15]" << std::hex << tx_buf[15] << "\n";
-  std::cout << "tx_buf[16]" << std::hex << tx_buf[16] << "\n";
-  std::cout << "tx_buf[17]" << std::hex << tx_buf[17] << "\n";
-  std::cout << "tx_buf[18]" << std::hex << tx_buf[18] << "\n";
-  std::cout << "tx_buf[19]" << std::hex << tx_buf[19] << "\n";
+  // std::cout << "tx_buf[1]" << std::hex << tx_buf[1] << "\n";
+  // std::cout << "tx_buf[2]" << std::hex << tx_buf[2] << "\n";
+  // std::cout << "tx_buf[3]" << std::hex << tx_buf[3] << "\n";
+  // std::cout << "tx_buf[4]" << std::hex << tx_buf[4] << "\n";
+  // std::cout << "tx_buf[5]" << std::hex << tx_buf[5] << "\n";
+  // std::cout << "tx_buf[6]" << std::hex << tx_buf[6] << "\n";
+  // std::cout << "tx_buf[7]" << std::hex << tx_buf[7] << "\n";
+  // std::cout << "tx_buf[8]" << std::hex << tx_buf[8] << "\n";
+  // std::cout << "tx_buf[9]" << std::hex << tx_buf[9] << "\n";
+  // std::cout << "tx_buf[10]" << std::hex << tx_buf[10] << "\n";
+  // std::cout << "tx_buf[11]" << std::hex << tx_buf[11] << "\n";
+  // std::cout << "tx_buf[12]" << std::hex << tx_buf[12] << "\n";
+  // std::cout << "tx_buf[13]" << std::hex << tx_buf[13] << "\n";
+  // std::cout << "tx_buf[14]" << std::hex << tx_buf[14] << "\n";
+  // std::cout << "tx_buf[15]" << std::hex << tx_buf[15] << "\n";
+  // std::cout << "tx_buf[16]" << std::hex << tx_buf[16] << "\n";
+  // std::cout << "tx_buf[17]" << std::hex << tx_buf[17] << "\n";
+  // std::cout << "tx_buf[18]" << std::hex << tx_buf[18] << "\n";
+  // std::cout << "tx_buf[19]" << std::hex << tx_buf[19] << "\n";
 
-  std::cout << "tx_buf[20]" << std::hex << tx_buf[20] << "\n";
-  std::cout << "tx_buf[21]" << std::hex << tx_buf[21] << "\n";
-  std::cout << "tx_buf[22]" << std::hex << tx_buf[22] << "\n";
-  std::cout << "tx_buf[23]" << std::hex << tx_buf[23] << "\n";
-  std::cout << "tx_buf[24]" << std::hex << tx_buf[24] << "\n";
-  std::cout << "tx_buf[25]" << std::hex << tx_buf[25] << "\n";
-  std::cout << "tx_buf[26]" << std::hex << tx_buf[26] << "\n";
-  std::cout << "tx_buf[27]" << std::hex << tx_buf[27] << "\n";
-  std::cout << "tx_buf[28]" << std::hex << tx_buf[28] << "\n";
-  std::cout << "tx_buf[29]" << std::hex << tx_buf[29] << "\n";
-  std::cout << "tx_buf[30]" << std::hex << tx_buf[30] << "\n";
-  std::cout << "tx_buf[31]" << std::hex << tx_buf[31] << "\n";
-  std::cout << "tx_buf[32]" << std::hex << tx_buf[32] << "\n";
-  std::cout << "tx_buf[33]" << std::hex << tx_buf[33] << "\n";
-  std::cout << "tx_buf[34]" << std::hex << tx_buf[34] << "\n";
-  std::cout << "tx_buf[35]" << std::hex << tx_buf[35] << "\n";
-  std::cout << "tx_buf[36]" << std::hex << tx_buf[36] << "\n";
-  std::cout << "tx_buf[37]" << std::hex << tx_buf[37] << "\n";
-  std::cout << "tx_buf[38]" << std::hex << tx_buf[38] << "\n";
-  std::cout << "tx_buf[39]" << std::hex << tx_buf[39] << "\n";
-  std::cout << "tx_buf[40]" << std::hex << tx_buf[40] << "\n";
+  // std::cout << "tx_buf[20]" << std::hex << tx_buf[20] << "\n";
+  // std::cout << "tx_buf[21]" << std::hex << tx_buf[21] << "\n";
+  // std::cout << "tx_buf[22]" << std::hex << tx_buf[22] << "\n";
+  // std::cout << "tx_buf[23]" << std::hex << tx_buf[23] << "\n";
+  // std::cout << "tx_buf[24]" << std::hex << tx_buf[24] << "\n";
+  // std::cout << "tx_buf[25]" << std::hex << tx_buf[25] << "\n";
+  // std::cout << "tx_buf[26]" << std::hex << tx_buf[26] << "\n";
+  // std::cout << "tx_buf[27]" << std::hex << tx_buf[27] << "\n";
+  // std::cout << "tx_buf[28]" << std::hex << tx_buf[28] << "\n";
+  // std::cout << "tx_buf[29]" << std::hex << tx_buf[29] << "\n";
+  // std::cout << "tx_buf[30]" << std::hex << tx_buf[30] << "\n";
+  // std::cout << "tx_buf[31]" << std::hex << tx_buf[31] << "\n";
+  // std::cout << "tx_buf[32]" << std::hex << tx_buf[32] << "\n";
+  // std::cout << "tx_buf[33]" << std::hex << tx_buf[33] << "\n";
+  // std::cout << "tx_buf[34]" << std::hex << tx_buf[34] << "\n";
+  // std::cout << "tx_buf[35]" << std::hex << tx_buf[35] << "\n";
+  // std::cout << "tx_buf[36]" << std::hex << tx_buf[36] << "\n";
+  // std::cout << "tx_buf[37]" << std::hex << tx_buf[37] << "\n";
+  // std::cout << "tx_buf[38]" << std::hex << tx_buf[38] << "\n";
+  // std::cout << "tx_buf[39]" << std::hex << tx_buf[39] << "\n";
+  // std::cout << "tx_buf[40]" << std::hex << tx_buf[40] << "\n";
 
   std::cout << "tx_buf[61]" << std::hex << tx_buf[61] << "\n";
   std::cout << "tx_buf[62]" << std::hex << tx_buf[62] << "\n";
