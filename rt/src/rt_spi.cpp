@@ -580,9 +580,8 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << "/***************TRANSMIT DEBUG***************/" << "\n";
 
   tx_buf[0] = 0;
-  tx_buf[1] = 0;
   for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
-      tx_buf[i+2] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
+      tx_buf[i+1] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
 
   std::cout << "cmd_d[0:3]"
             << "\n";
