@@ -562,8 +562,8 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // data->spi_driver_status = spi_driver_iterations << 16;
 
   // transmit and receive buffers
-  uint16_t tx_buf[K_WORDS_PER_MESSAGE_BIQU + 1];
-  uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 1];
+  uint16_t tx_buf[K_WORDS_PER_MESSAGE_BIQU + 2];
+  uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 2];
   // uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU];
 
   // copy command into spine type:
@@ -580,8 +580,9 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << "/***************TRANSMIT DEBUG***************/" << "\n";
 
   tx_buf[0] = 0;
+  tx_buf[1] = 0;
   for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
-      tx_buf[i+1] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
+      tx_buf[i+2] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
 
   std::cout << "cmd_d[0:3]"
             << "\n";
@@ -619,7 +620,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
     spi_message[i].bits_per_word = spi_bits_per_word;
     spi_message[i].cs_change = 1;
     spi_message[i].delay_usecs = 0;
-    spi_message[i].len = word_len * (K_WORDS_PER_MESSAGE_BIQU + 1); // each message is made up of 2 words, includes dummy bytes
+    spi_message[i].len = word_len * (K_WORDS_PER_MESSAGE_BIQU + 2); // each message is made up of 2 words, includes dummy bytes
     spi_message[i].rx_buf = (uint64_t)rx_buf;
     spi_message[i].tx_buf = (uint64_t)tx_buf;
   }
@@ -635,14 +636,14 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
     // for (int i = 0; i < 58; i++)   // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
     //   data_d[i] = (rx_buf[i] >> 8) + ((rx_buf[i] & 0xff) << 8);
     for (int i = 0; i < 58; i++)      // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
-      data_d[i] = (rx_buf[i+1] >> 8) + ((rx_buf[i+1] & 0xff) << 8);
+      data_d[i] = (rx_buf[i+2] >> 8) + ((rx_buf[i+2] & 0xff) << 8);
 
   std::cout << "/***************RECEIVE DEBUG***************/" << "\n";
 
   // // copy back to data
   // // data = g_spine_biqu_data;
   std::cout << "uint16_t: rx_buf" << "\n";
-  std::cout << "rx_buf[1]: "<< rx_buf[0] << "\n";
+  std::cout << "rx_buf[0]: "<< rx_buf[0] << "\n";
   std::cout << "rx_buf[1]: "<< rx_buf[1] << "\n";
   std::cout << "rx_buf[2]: "<< rx_buf[2] << "\n";
   std::cout << "rx_buf[3]: "<< rx_buf[3] << "\n";
