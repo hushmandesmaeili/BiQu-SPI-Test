@@ -634,6 +634,16 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << "tx_buf[39]" << std::hex << tx_buf[39] << "\n";
   std::cout << "tx_buf[40]" << std::hex << tx_buf[40] << "\n";
 
+  std::cout << "tx_buf[124]" << std::hex << tx_buf[124] << "\n";
+  std::cout << "tx_buf[125]" << std::hex << tx_buf[125] << "\n";
+  std::cout << "tx_buf[126]" << std::hex << tx_buf[126] << "\n";
+  std::cout << "tx_buf[127]" << std::hex << tx_buf[127] << "\n";
+  std::cout << "tx_buf[128]" << std::hex << tx_buf[128] << "\n";
+  std::cout << "tx_buf[129]" << std::hex << tx_buf[129] << "\n";
+  std::cout << "tx_buf[130]" << std::hex << tx_buf[130] << "\n";
+  std::cout << "tx_buf[131]" << std::hex << tx_buf[131] << "\n";
+
+
   // std::cout << "float: g_spine_biqu_cmd"
   //           << "\n";
   // std::cout << g_spine_biqu_cmd.q_des_abad[0] << "\n";
