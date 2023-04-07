@@ -562,9 +562,9 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // data->spi_driver_status = spi_driver_iterations << 16;
 
   // transmit and receive buffers
-  uint16_t tx_buf[K_WORDS_PER_MESSAGE_BIQU];
-  // uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 2];
-  uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU];
+  uint16_t tx_buf[K_WORDS_PER_MESSAGE_BIQU + 1];
+  uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU + 1];
+  // uint16_t rx_buf[K_WORDS_PER_MESSAGE_BIQU];
 
   // copy command into spine type:
   spi_to_spine_biqu(command, &g_spine_biqu_cmd); // g_spine_biqu_cmd and g_spine_biqu_data are declared at the top
@@ -574,30 +574,28 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   uint16_t *data_d = (uint16_t *)&g_spine_biqu_data;
 
   // zero rx buffer
-  memset(rx_buf, 0, K_WORDS_PER_MESSAGE_BIQU * sizeof(uint16_t));
-
-  // copy into tx buffer flipping bytes
-  // for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
-  //   tx_buf[i] = (reverseBits((cmd_d[i] >> 8) & 0xff) << 8) | reverseBits(cmd_d[i] & 0xff);
+  // memset(rx_buf, 0, K_WORDS_PER_MESSAGE_BIQU * sizeof(uint16_t));
+  memset(rx_buf, 0, (K_WORDS_PER_MESSAGE_BIQU + 1) * sizeof(uint16_t));
 
   std::cout << "/***************TRANSMIT DEBUG***************/" << "\n";
 
+  tx_buf[0] = 0;
   for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
-      tx_buf[i] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
-  //  for (int i = 0; i < K_WORDS_PER_MESSAGE; i++)
-  std::cout << "cmd_d[0]"
+      tx_buf[i+1] = (cmd_d[i] >> 8) + ((cmd_d[i] & 0xff) << 8);
+
+  std::cout << "cmd_d[0:3]"
             << "\n";
   std::cout << std::hex << cmd_d[0] << "\n";
   std::cout << std::hex << cmd_d[1] << "\n";
   std::cout << std::hex << cmd_d[2] << "\n";
   std::cout << std::hex << cmd_d[3] << "\n";
   
-  std::cout << "tx_buf[0]"
+  std::cout << "tx_buf[1:4]"
             << "\n";
-  std::cout << std::hex << tx_buf[0] << "\n";
   std::cout << std::hex << tx_buf[1] << "\n";
   std::cout << std::hex << tx_buf[2] << "\n";
   std::cout << std::hex << tx_buf[3] << "\n";
+  std::cout << std::hex << tx_buf[4] << "\n";
 
   std::cout << "float: g_spine_biqu_cmd"
             << "\n";
@@ -621,9 +619,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
     spi_message[i].bits_per_word = spi_bits_per_word;
     spi_message[i].cs_change = 1;
     spi_message[i].delay_usecs = 0;
-    spi_message[i].len = word_len * K_WORDS_PER_MESSAGE_BIQU; // each message is made up of 2 words
-    // spi_message[i].rx_buf = (__uint128_t)rx_buf;
-    // spi_message[i].tx_buf = (__uint128_t)tx_buf;
+    spi_message[i].len = word_len * (K_WORDS_PER_MESSAGE_BIQU + 1); // each message is made up of 2 words, includes dummy bytes
     spi_message[i].rx_buf = (uint64_t)rx_buf;
     spi_message[i].tx_buf = (uint64_t)tx_buf;
   }
@@ -635,19 +631,17 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
     perror("[ERROR] cannot send message");
   (void)rv;
 
-  // flip bytes the other way
-  // for (int i = 0; i < 12; i++) // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
-    // data_d[i] = reverseBytes(reverseBits(rx_buf[i]));
-    // data_d[i] = (reverseBits((rx_buf[i] >> 8) & 0xff) << 8) | reverseBits(rx_buf[i] & 0xff);
-    for (int i = 0; i < 58; i++)
-      data_d[i] = (rx_buf[i] >> 8) + ((rx_buf[i] & 0xff) << 8);
+  // flip bytes the other way, exclude dummy bytes
+    // for (int i = 0; i < 58; i++)   // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
+    //   data_d[i] = (rx_buf[i] >> 8) + ((rx_buf[i] & 0xff) << 8);
+    for (int i = 0; i < 58; i++)      // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
+      data_d[i] = (rx_buf[i+1] >> 8) + ((rx_buf[i+1] & 0xff) << 8);
 
   std::cout << "/***************RECEIVE DEBUG***************/" << "\n";
 
   // // copy back to data
   // // data = g_spine_biqu_data;
   std::cout << "uint16_t: rx_buf" << "\n";
-  std::cout << "rx_buf[0]: "<< rx_buf[0] << "\n";
   std::cout << "rx_buf[1]: "<< rx_buf[1] << "\n";
   std::cout << "rx_buf[2]: "<< rx_buf[2] << "\n";
   std::cout << "rx_buf[3]: "<< rx_buf[3] << "\n";
@@ -659,6 +653,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << "rx_buf[9]: "<< rx_buf[9] << "\n";
   std::cout << "rx_buf[10]: "<< rx_buf[10] << "\n";
   std::cout << "rx_buf[11]: "<< rx_buf[11] << "\n";
+  std::cout << "rx_buf[12]: "<< rx_buf[12] << "\n";
 
   std::cout << "data_d"
             << "\n";
