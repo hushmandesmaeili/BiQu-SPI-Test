@@ -699,6 +699,12 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << std::hex << g_spine_biqu_data.qd_knee[1] << "\n";
   std::cout << std::hex << g_spine_biqu_data.qd_knee[2] << "\n";
   std::cout << std::hex << g_spine_biqu_data.qd_knee[3] << "\n";
+
+  std::cout << std::hex << g_spine_biqu_data.flags[0] << "\n";
+  std::cout << std::hex << g_spine_biqu_data.flags[1] << "\n";
+  std::cout << std::hex << g_spine_biqu_data.flags[2] << "\n";
+  std::cout << std::hex << g_spine_biqu_data.flags[3] << "\n";
+  std::cout << std::hex << g_spine_biqu_data.checksum << "\n";
 }
 
 /*!
