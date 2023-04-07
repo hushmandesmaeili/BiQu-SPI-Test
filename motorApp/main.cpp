@@ -142,7 +142,7 @@ int main()
   data.q_abad[3] = 0;
 
   spi_biqu_send_receive(&command, &data);
-  // spi_biqu_send_receive(&command, &data);
+  spi_biqu_send_receive(&command, &data);
 
 
   // uint16_t tx_buf[4];
