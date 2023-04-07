@@ -591,6 +591,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   std::cout << "cmd_d[3]" << std::hex << cmd_d[3] << "\n";
   std::cout << "cmd_d[4]" << std::hex << cmd_d[4] << "\n";
   
+  std::cout << "cmd_d[60]" << std::hex << cmd_d[60] << "\n";
   std::cout << "cmd_d[61]" << std::hex << cmd_d[61] << "\n";
   std::cout << "cmd_d[62]" << std::hex << cmd_d[62] << "\n";
   std::cout << "cmd_d[63]" << std::hex << cmd_d[63] << "\n";
