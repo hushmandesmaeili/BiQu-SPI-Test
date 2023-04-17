@@ -10,6 +10,23 @@
 #include "../lcm-types/cpp/spi_command_t.hpp"
 #include "../lcm-types/cpp/spi_data_t.hpp"
 
+#ifdef linux
+  #include <sys/timerfd.h>
+#endif
+#include <unistd.h>
+#include <cmath>
+#include "Timer.h"
+
+float _period = 0.02;
+volatile bool _running = false;
+float _lastRuntime = 0;
+float _lastPeriodTime = 0;
+// float _maxPeriod = 0;
+// float _maxRuntime = 0;
+
+int _counter = 0;
+int _maxCounter = 2000;
+
 /*!
  *
  */
@@ -112,5 +129,49 @@ int main()
   // spi_biqu_send_receive(&command, &data);
   // spi_biqu_send_receive(&command, &data);
 
+
+  //******TEST FOR PERIODIC SEND******//
+  _running = true;
+  _counter = 0;
+
+#ifdef linux
+  auto timerFd = timerfd_create(CLOCK_MONOTONIC, 0);
+#endif
+  int seconds = (int)_period;
+  int nanoseconds = (int)(1e9 * std::fmod(_period, 1.f));
+
+  Timer t;
+
+#ifdef linux
+  itimerspec timerSpec;
+  timerSpec.it_interval.tv_sec = seconds;
+  timerSpec.it_value.tv_sec = seconds;
+  timerSpec.it_value.tv_nsec = nanoseconds;
+  timerSpec.it_interval.tv_nsec = nanoseconds;
+
+  timerfd_settime(timerFd, 0, &timerSpec, nullptr);
+#endif
+  unsigned long long missed = 0;
+
+  printf("[PeriodicTask] Start %s (%d s, %d ns)\n", "spi", seconds,
+         nanoseconds);
+  while (_running) {
+    _lastPeriodTime = (float)t.getSeconds();
+    t.start();
+    runSpi();
+    _lastRuntime = (float)t.getSeconds();
+#ifdef linux
+    int m = read(timerFd, &missed, sizeof(missed));
+    (void)m;
+#endif
+    // _maxPeriod = std::max(_maxPeriod, _lastPeriodTime);
+    // _maxRuntime = std::max(_maxRuntime, _lastRuntime);
+    if (++_counter > _maxCounter) _running = false;
+  }
+
   return 0;
+}
+
+void runSpi() {
+  printf("Send " + _counter);
 }
