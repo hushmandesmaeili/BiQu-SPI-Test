@@ -17,7 +17,7 @@
 #include <cmath>
 #include "Timer.h"
 
-float _period = 0.02;
+float _period = 0.002;
 volatile bool _running = false;
 float _lastRuntime = 0;
 float _lastPeriodTime = 0;
@@ -26,6 +26,10 @@ float _lastPeriodTime = 0;
 
 int _counter = 0;
 int _maxCounter = 2000;
+
+void runSpi() {
+  std::cout << "Send: " << _counter << "\n";
+}
 
 /*!
  *
@@ -172,6 +176,4 @@ int main()
   return 0;
 }
 
-void runSpi() {
-  printf("Send " + _counter);
-}
+
