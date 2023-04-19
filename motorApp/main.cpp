@@ -176,9 +176,9 @@ void debug_commands_vect(int command_num) {
 }
 
 void runSpi() {
-  // std::cout << "Send: " << _counter << "\n";
-  debug_commands_vect(_counter);
-  // spi_biqu_send_receive(&(commands[_counter]), &data);
+  std::cout << "Send: " << _counter << "\n";
+  // debug_commands_vect(_counter);
+  spi_biqu_send_receive(&(commands[_counter]), &data);
 }
 
 /*!
