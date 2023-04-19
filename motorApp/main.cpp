@@ -188,14 +188,11 @@ int main()
 {
   printf("Program started\n\n");
 
-  // // Setup  and Open SPI
-  // init_spi_biqu();
+  // Setup  and Open SPI
+  printf("Initiating SPI\n\n");
+  init_spi_biqu();
 
-  // spi_biqu_send_receive(&command, &data);
-  // spi_biqu_send_receive(&command, &data);
-  // spi_biqu_send_receive(&command, &data);
-
-
+  printf("Importing CSV data\n\n");
   //******TEST FOR import_csv******//
   import_csv();
   convert_csvdata_to_spicommand();
