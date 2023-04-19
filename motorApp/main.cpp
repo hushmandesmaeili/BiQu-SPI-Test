@@ -30,7 +30,7 @@ float _lastPeriodTime = 0;
 // float _maxRuntime = 0;
 
 int _counter = 0;
-int _maxCounter = 9482;     // 4 seconds duration at _period = 0.002
+int _maxCounter = 5835;     // 4 seconds duration at _period = 0.002
 
 // Declare 2D vector to store data from CSV file
 std::vector<std::vector<float>> dataCsv;
@@ -59,7 +59,8 @@ void import_csv() {
     // Add the row to the 2D vector
     dataCsv.push_back(row);
   }
-
+  
+  _maxCounter = dataCsv.size() - 1;
   // Test code for import
   // std::cout << "Data length (rows): " << dataCsv.size() << "\n";
   // std::cout << dataCsv[0][1] << "\n";
