@@ -158,6 +158,63 @@ void convert_csvdata_to_spicommand() {
   }
 }
 
+void debug_commands_vect() {
+   // Testing spi_command conversion
+  std::cout << commands[0].q_des_abad[0] << ", "
+            << commands[0].q_des_hip[0] << ", "
+            << commands[0].q_des_knee[0] << ", "
+            << commands[0].qd_des_abad[0] << ", "
+            << commands[0].qd_des_hip[0] << ", "
+            << commands[0].qd_des_knee[0] << ", "
+            << commands[0].kp_abad[0] << ", "
+            << commands[0].kp_hip[0] << ", "
+            << commands[0].kp_knee[0] << ", "
+            << commands[0].kd_abad[0] << ", "
+            << commands[0].kd_hip[0] << ", "
+            << commands[0].kd_knee[0] << ", "
+            << commands[0].tau_abad_ff[0] << ", "
+            << commands[0].tau_hip_ff[0] << ", "
+            << commands[0].tau_knee_ff[0] << ", "
+            << commands[0].flags[0]
+            << "\n";
+
+  std::cout << commands[1].q_des_abad[0] << ", "
+            << commands[1].q_des_hip[0] << ", "
+            << commands[1].q_des_knee[0] << ", "
+            << commands[1].qd_des_abad[0] << ", "
+            << commands[1].qd_des_hip[0] << ", "
+            << commands[1].qd_des_knee[0] << ", "
+            << commands[1].kp_abad[0] << ", "
+            << commands[1].kp_hip[0] << ", "
+            << commands[1].kp_knee[0] << ", "
+            << commands[1].kd_abad[0] << ", "
+            << commands[1].kd_hip[0] << ", "
+            << commands[1].kd_knee[0] << ", "
+            << commands[1].tau_abad_ff[0] << ", "
+            << commands[1].tau_hip_ff[0] << ", "
+            << commands[1].tau_knee_ff[0] << ", "
+            << commands[1].flags[0]
+            << "\n";
+
+  std::cout << commands[5406].q_des_abad[0] << ", "
+            << commands[5406].q_des_hip[0] << ", "
+            << commands[5406].q_des_knee[0] << ", "
+            << commands[5406].qd_des_abad[0] << ", "
+            << commands[5406].qd_des_hip[0] << ", "
+            << commands[5406].qd_des_knee[0] << ", "
+            << commands[5406].kp_abad[0] << ", "
+            << commands[5406].kp_hip[0] << ", "
+            << commands[5406].kp_knee[0] << ", "
+            << commands[5406].kd_abad[0] << ", "
+            << commands[5406].kd_hip[0] << ", "
+            << commands[5406].kd_knee[0] << ", "
+            << commands[5406].tau_abad_ff[0] << ", "
+            << commands[5406].tau_hip_ff[0] << ", "
+            << commands[5406].tau_knee_ff[0] << ", "
+            << commands[5406].flags[0]
+            << "\n";
+}
+
 /*!
  *
  */
@@ -261,6 +318,11 @@ int main()
   // spi_biqu_send_receive(&command, &data);
 
 
+  //******TEST FOR import_csv******//
+  import_csv();
+  convert_csvdata_to_spicommand();
+
+
   //******TEST FOR PERIODIC SEND******//
 //   _running = true;
 //   _counter = 0;
@@ -299,67 +361,7 @@ int main()
 //     // _maxRuntime = std::max(_maxRuntime, _lastRuntime);
 //     if (++_counter > _maxCounter) _running = false;
 //   }
-
-
-  //******TEST FOR import_csv******//
-  import_csv();
-  convert_csvdata_to_spicommand();
-
-  // Testing spi_command conversion
-  std::cout << commands[0].q_des_abad[0] << ", "
-            << commands[0].q_des_hip[0] << ", "
-            << commands[0].q_des_knee[0] << ", "
-            << commands[0].qd_des_abad[0] << ", "
-            << commands[0].qd_des_hip[0] << ", "
-            << commands[0].qd_des_knee[0] << ", "
-            << commands[0].kp_abad[0] << ", "
-            << commands[0].kp_hip[0] << ", "
-            << commands[0].kp_knee[0] << ", "
-            << commands[0].kd_abad[0] << ", "
-            << commands[0].kd_hip[0] << ", "
-            << commands[0].kd_knee[0] << ", "
-            << commands[0].tau_abad_ff[0] << ", "
-            << commands[0].tau_hip_ff[0] << ", "
-            << commands[0].tau_knee_ff[0] << ", "
-            << commands[0].flags[0]
-            << "\n";
-
-  std::cout << commands[1].q_des_abad[0] << ", "
-            << commands[1].q_des_hip[0] << ", "
-            << commands[1].q_des_knee[0] << ", "
-            << commands[1].qd_des_abad[0] << ", "
-            << commands[1].qd_des_hip[0] << ", "
-            << commands[1].qd_des_knee[0] << ", "
-            << commands[1].kp_abad[0] << ", "
-            << commands[1].kp_hip[0] << ", "
-            << commands[1].kp_knee[0] << ", "
-            << commands[1].kd_abad[0] << ", "
-            << commands[1].kd_hip[0] << ", "
-            << commands[1].kd_knee[0] << ", "
-            << commands[1].tau_abad_ff[0] << ", "
-            << commands[1].tau_hip_ff[0] << ", "
-            << commands[1].tau_knee_ff[0] << ", "
-            << commands[1].flags[0]
-            << "\n";
-
-  std::cout << commands[5406].q_des_abad[0] << ", "
-            << commands[5406].q_des_hip[0] << ", "
-            << commands[5406].q_des_knee[0] << ", "
-            << commands[5406].qd_des_abad[0] << ", "
-            << commands[5406].qd_des_hip[0] << ", "
-            << commands[5406].qd_des_knee[0] << ", "
-            << commands[5406].kp_abad[0] << ", "
-            << commands[5406].kp_hip[0] << ", "
-            << commands[5406].kp_knee[0] << ", "
-            << commands[5406].kd_abad[0] << ", "
-            << commands[5406].kd_hip[0] << ", "
-            << commands[5406].kd_knee[0] << ", "
-            << commands[5406].tau_abad_ff[0] << ", "
-            << commands[5406].tau_hip_ff[0] << ", "
-            << commands[5406].tau_knee_ff[0] << ", "
-            << commands[5406].flags[0]
-            << "\n";
-
+ 
   return 0;
 }
 
