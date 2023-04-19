@@ -51,11 +51,11 @@ void import_csv() {
     std::string value_str;
     std::vector<float> row;
     while (std::getline(ss, value_str, ',')) {
-      std::cout << ++count;
+      std::cout << count << "\n";
       float value = std::stof(value_str);
       row.push_back(value);
     }
-
+    ++count;
     // Add the row to the 2D vector
     dataCsv.push_back(row);
   }
