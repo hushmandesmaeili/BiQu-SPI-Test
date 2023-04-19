@@ -35,6 +35,11 @@ int _maxCounter = 2000;     // 4 seconds duration at _period = 0.002
 // Declare 2D vector to store data from CSV file
 std::vector<std::vector<float>> data;
 
+// spi_data_t data;
+// spi_command_t command;
+
+std::vector<spi_command_t> commands;
+
 void runSpi() {
   std::cout << "Send: " << _counter << "\n";
 }
@@ -58,16 +63,100 @@ void import_csv() {
     data.push_back(row);
   }
 
-  // Test code for import
-  std::cout << "Data length (rows): " << data.size() << "\n";
-  std::cout << data[0][1] << "\n";
-  std::cout << data[1][1] << "\n";
-  std::cout << data[2][1] << "\n";
+  // // Test code for import
+  // std::cout << "Data length (rows): " << data.size() << "\n";
+  // std::cout << data[0][1] << "\n";
+  // std::cout << data[1][1] << "\n";
+  // std::cout << data[2][1] << "\n";
 }
 
-// void convert_csvdata_to_spicommand() {
+void convert_csvdata_to_spicommand() {
 
-// }
+  for (int i = 0; i < data.size(); i++) {
+    spi_command_t command;
+    command.q_des_abad[0] = data[i][1];
+    command.q_des_abad[1] = 0;
+    command.q_des_abad[2] = 0;
+    command.q_des_abad[3] = 0;
+
+    command.q_des_hip[0] = data[i][2];
+    command.q_des_hip[1] = 0;
+    command.q_des_hip[2] = 0;
+    command.q_des_hip[3] = 0;
+
+    command.q_des_knee[0] = data[i][3];
+    command.q_des_knee[1] = 0;
+    command.q_des_knee[2] = 0;
+    command.q_des_knee[3] = 0;
+
+    command.qd_des_abad[0] = data[i][4];
+    command.qd_des_abad[1] = 0;
+    command.qd_des_abad[2] = 0;
+    command.qd_des_abad[3] = 0;
+
+    command.qd_des_hip[0] = data[i][5];
+    command.qd_des_hip[1] = 0;
+    command.qd_des_hip[2] = 0;
+    command.qd_des_hip[3] = 0;
+
+    command.qd_des_knee[0] = data[i][6];
+    command.qd_des_knee[1] = 0;
+    command.qd_des_knee[2] = 0;
+    command.qd_des_knee[3] = 0;
+
+    command.kp_abad[0] = data[i][7];
+    command.kp_abad[1] = 0;
+    command.kp_abad[2] = 0;
+    command.kp_abad[3] = 0;
+
+    command.kp_hip[0] = data[i][8];
+    command.kp_hip[1] = 0;
+    command.kp_hip[2] = 0;
+    command.kp_hip[3] = 0;
+
+    command.kp_knee[0] = data[i][10];
+    command.kp_knee[1] = 0;
+    command.kp_knee[2] = 0;
+    command.kp_knee[3] = 0;
+
+    command.kd_abad[0] = data[i][11];
+    command.kd_abad[1] = 0;
+    command.kd_abad[2] = 0;
+    command.kd_abad[3] = 0;
+
+    command.kd_hip[0] = data[i][12];
+    command.kd_hip[1] = 0;
+    command.kd_hip[2] = 0;
+    command.kd_hip[3] = 0;
+
+    command.kd_knee[0] = data[i][13];
+    command.kd_knee[1] = 0;
+    command.kd_knee[2] = 0;
+    command.kd_knee[3] = 0;
+
+    command.tau_abad_ff[0] = data[i][14];
+    command.tau_abad_ff[1] = 0;
+    command.tau_abad_ff[2] = 0;
+    command.tau_abad_ff[3] = 0;
+
+    command.tau_hip_ff[0] = data[i][15];
+    command.tau_hip_ff[1] = 0;
+    command.tau_hip_ff[2] = 0;
+    command.tau_hip_ff[3] = 0;
+
+    command.tau_knee_ff[0] = data[i][16];
+    command.tau_knee_ff[1] = 0;
+    command.tau_knee_ff[2] = 0;
+    command.tau_knee_ff[3] = 0;
+
+    command.flags[0] = data[i][17];
+    command.flags[1] = 0;
+    command.flags[2] = 0;
+    command.flags[3] = 0;
+
+    commands.push_back(command);
+  }
+}
 
 /*!
  *
@@ -214,6 +303,12 @@ int main()
 
   //******TEST FOR import_csv******//
   import_csv();
+  convert_csvdata_to_spicommand();
+
+  // Testing spi_command conversion
+  std::cout << commands[0].q_des_abad[0] << "\n";
+  std::cout << commands[1].q_des_abad[0] << "\n";
+  std::cout << commands[2].q_des_abad[0] << "\n";
 
   return 0;
 }
