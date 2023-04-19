@@ -114,42 +114,42 @@ void convert_csvdata_to_spicommand() {
     command.kp_hip[2] = 0;
     command.kp_hip[3] = 0;
 
-    command.kp_knee[0] = data[i][10];
+    command.kp_knee[0] = data[i][9];
     command.kp_knee[1] = 0;
     command.kp_knee[2] = 0;
     command.kp_knee[3] = 0;
 
-    command.kd_abad[0] = data[i][11];
+    command.kd_abad[0] = data[i][10];
     command.kd_abad[1] = 0;
     command.kd_abad[2] = 0;
     command.kd_abad[3] = 0;
 
-    command.kd_hip[0] = data[i][12];
+    command.kd_hip[0] = data[i][11];
     command.kd_hip[1] = 0;
     command.kd_hip[2] = 0;
     command.kd_hip[3] = 0;
 
-    command.kd_knee[0] = data[i][13];
+    command.kd_knee[0] = data[i][12];
     command.kd_knee[1] = 0;
     command.kd_knee[2] = 0;
     command.kd_knee[3] = 0;
 
-    command.tau_abad_ff[0] = data[i][14];
+    command.tau_abad_ff[0] = data[i][13];
     command.tau_abad_ff[1] = 0;
     command.tau_abad_ff[2] = 0;
     command.tau_abad_ff[3] = 0;
 
-    command.tau_hip_ff[0] = data[i][15];
+    command.tau_hip_ff[0] = data[i][14];
     command.tau_hip_ff[1] = 0;
     command.tau_hip_ff[2] = 0;
     command.tau_hip_ff[3] = 0;
 
-    command.tau_knee_ff[0] = data[i][16];
+    command.tau_knee_ff[0] = data[i][15];
     command.tau_knee_ff[1] = 0;
     command.tau_knee_ff[2] = 0;
     command.tau_knee_ff[3] = 0;
 
-    command.flags[0] = data[i][17];
+    command.flags[0] = data[i][16];
     command.flags[1] = 0;
     command.flags[2] = 0;
     command.flags[3] = 0;
@@ -306,9 +306,59 @@ int main()
   convert_csvdata_to_spicommand();
 
   // Testing spi_command conversion
-  std::cout << commands[0].q_des_abad[0] << "\n";
-  std::cout << commands[1].q_des_abad[0] << "\n";
-  std::cout << commands[2].q_des_abad[0] << "\n";
+  std::cout << commands[0].q_des_abad[0] << ", "
+            << commands[0].q_des_hip[0] << ", "
+            << commands[0].q_des_knee[0] << ", "
+            << commands[0].qd_des_abad[0] << ", "
+            << commands[0].qd_des_hip[0] << ", "
+            << commands[0].qd_des_knee[0] << ", "
+            << commands[0].kp_abad[0] << ", "
+            << commands[0].kp_hip[0] << ", "
+            << commands[0].kp_knee[0] << ", "
+            << commands[0].kd_abad[0] << ", "
+            << commands[0].kd_hip[0] << ", "
+            << commands[0].kd_knee[0] << ", "
+            << commands[0].tau_abad_ff[0] << ", "
+            << commands[0].tau_hip_ff[0] << ", "
+            << commands[0].tau_knee_ff[0] << ", "
+            << commands[0].flags[0]
+            << "\n";
+
+  std::cout << commands[1].q_des_abad[0] << ", "
+            << commands[1].q_des_hip[0] << ", "
+            << commands[1].q_des_knee[0] << ", "
+            << commands[1].qd_des_abad[0] << ", "
+            << commands[1].qd_des_hip[0] << ", "
+            << commands[1].qd_des_knee[0] << ", "
+            << commands[1].kp_abad[0] << ", "
+            << commands[1].kp_hip[0] << ", "
+            << commands[1].kp_knee[0] << ", "
+            << commands[1].kd_abad[0] << ", "
+            << commands[1].kd_hip[0] << ", "
+            << commands[1].kd_knee[0] << ", "
+            << commands[1].tau_abad_ff[0] << ", "
+            << commands[1].tau_hip_ff[0] << ", "
+            << commands[1].tau_knee_ff[0] << ", "
+            << commands[1].flags[0]
+            << "\n";
+
+  std::cout << commands[5406].q_des_abad[0] << ", "
+            << commands[5406].q_des_hip[0] << ", "
+            << commands[5406].q_des_knee[0] << ", "
+            << commands[5406].qd_des_abad[0] << ", "
+            << commands[5406].qd_des_hip[0] << ", "
+            << commands[5406].qd_des_knee[0] << ", "
+            << commands[5406].kp_abad[0] << ", "
+            << commands[5406].kp_hip[0] << ", "
+            << commands[5406].kp_knee[0] << ", "
+            << commands[5406].kd_abad[0] << ", "
+            << commands[5406].kd_hip[0] << ", "
+            << commands[5406].kd_knee[0] << ", "
+            << commands[5406].tau_abad_ff[0] << ", "
+            << commands[5406].tau_hip_ff[0] << ", "
+            << commands[5406].tau_knee_ff[0] << ", "
+            << commands[5406].flags[0]
+            << "\n";
 
   return 0;
 }
