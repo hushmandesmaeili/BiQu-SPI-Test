@@ -30,7 +30,7 @@ float _lastPeriodTime = 0;
 // float _maxRuntime = 0;
 
 int _counter = 0;
-int _maxCounter = 12130;     // 4 seconds duration at _period = 0.002
+int _maxCounter = 12131;     // 4 seconds duration at _period = 0.002
 
 // Declare 2D vector to store data from CSV file
 std::vector<std::vector<float>> dataCsv;
@@ -152,6 +152,7 @@ void convert_csvdata_to_spicommand() {
 
     commands.push_back(command);
   }
+  std::cout << "Completed dataCsv to spi_command conversion" << "\n";
 }
 
 void debug_commands_vect(int command_num) {
