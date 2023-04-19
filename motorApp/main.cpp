@@ -59,11 +59,11 @@ void import_csv() {
     dataCsv.push_back(row);
   }
 
-  // // Test code for import
-  // std::cout << "Data length (rows): " << data.size() << "\n";
-  // std::cout << data[0][1] << "\n";
-  // std::cout << data[1][1] << "\n";
-  // std::cout << data[2][1] << "\n";
+  // Test code for import
+  std::cout << "Data length (rows): " << data.size() << "\n";
+  std::cout << data[0][1] << "\n";
+  std::cout << data[1][1] << "\n";
+  std::cout << data[2][1] << "\n";
 }
 
 void convert_csvdata_to_spicommand() {
