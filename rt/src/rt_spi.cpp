@@ -575,7 +575,7 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
   // zero rx buffer
   memset(rx_buf, 0, (K_WORDS_PER_MESSAGE_BIQU + 2) * sizeof(uint16_t));
 
-  std::cout << "/***************TRANSMIT DEBUG***************/" << "\n";
+  // std::cout << "/***************TRANSMIT DEBUG***************/" << "\n";
 
   tx_buf[0] = 0;
   for (int i = 0; i < K_WORDS_PER_MESSAGE_BIQU; i++)
@@ -612,43 +612,43 @@ void spi_biqu_send_receive(spi_command_t *command, spi_data_t *data)
     for (int i = 0; i < 58; i++)      // BiQu = 58, from spine_biqu_data_t entries * 2 bytes/entry
       data_d[i] = (rx_buf[i+2] >> 8) + ((rx_buf[i+2] & 0xff) << 8);
 
-  std::cout << "/***************RECEIVE DEBUG***************/" << "\n";
+  // std::cout << "/***************RECEIVE DEBUG***************/" << "\n";
 
   spine_to_spi_biqu(data, &g_spine_biqu_data);
 
   // std::cout << "float: g_spine_biqu_data"
   //           << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_abad[0] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_abad[1] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_abad[2] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_abad[3] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_hip[0] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_hip[1] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_hip[2] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_hip[3] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_knee[0] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_knee[1] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_knee[2] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.q_knee[3] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_abad[0] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_abad[1] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_abad[2] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_abad[3] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_hip[0] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_hip[1] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_hip[2] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_hip[3] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_knee[0] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_knee[1] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_knee[2] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.q_knee[3] << "\n";
 
-  std::cout << g_spine_biqu_data.qd_abad[0] << "\n";
-  std::cout << g_spine_biqu_data.qd_abad[1] << "\n";
-  std::cout << g_spine_biqu_data.qd_abad[2] << "\n";
-  std::cout << g_spine_biqu_data.qd_abad[3] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_hip[0] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_hip[1] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_hip[2] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_hip[3] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_knee[0] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_knee[1] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_knee[2] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.qd_knee[3] << "\n";
+  // std::cout << g_spine_biqu_data.qd_abad[0] << "\n";
+  // std::cout << g_spine_biqu_data.qd_abad[1] << "\n";
+  // std::cout << g_spine_biqu_data.qd_abad[2] << "\n";
+  // std::cout << g_spine_biqu_data.qd_abad[3] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_hip[0] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_hip[1] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_hip[2] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_hip[3] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_knee[0] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_knee[1] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_knee[2] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.qd_knee[3] << "\n";
 
-  std::cout << std::hex << g_spine_biqu_data.flags[0] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.flags[1] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.flags[2] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.flags[3] << "\n";
-  std::cout << std::hex << g_spine_biqu_data.checksum << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.flags[0] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.flags[1] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.flags[2] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.flags[3] << "\n";
+  // std::cout << std::hex << g_spine_biqu_data.checksum << "\n";
 }
 
 /*!
