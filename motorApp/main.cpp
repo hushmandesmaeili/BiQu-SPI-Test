@@ -30,7 +30,7 @@ float _lastPeriodTime = 0;
 // float _maxRuntime = 0;
 
 int _counter = 0;
-int _maxCounter = 5968;     // 4 seconds duration at _period = 0.002
+int _maxCounter = 5967;     // 4 seconds duration at _period = 0.002
 
 // Declare 2D vector to store data from CSV file
 std::vector<std::vector<float>> dataCsv;
