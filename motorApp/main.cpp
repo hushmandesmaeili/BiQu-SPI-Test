@@ -17,6 +17,11 @@
 #include <cmath>
 #include "Timer.h"
 
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+
 float _period = 0.002;
 volatile bool _running = false;
 float _lastRuntime = 0;
@@ -25,11 +30,44 @@ float _lastPeriodTime = 0;
 // float _maxRuntime = 0;
 
 int _counter = 0;
-int _maxCounter = 2000;
+int _maxCounter = 2000;     // 4 seconds duration at _period = 0.002
+
+// Declare 2D vector to store data from CSV file
+std::vector<std::vector<float>> data;
 
 void runSpi() {
   std::cout << "Send: " << _counter << "\n";
 }
+
+void import_csv() {
+  std::ifstream infile("data.csv");
+  std::string line;
+
+  while (std::getline(infile, line)) {
+    // Create a stringstream from the line and use getline() again to 
+    // split the line into individual values separated by commas
+    std::stringstream ss(line);
+    std::string value_str;
+    std::vector<float> row;
+    while (std::getline(ss, value_str, ',')) {
+      float value = std::stof(value_str);
+      row.push_back(value);
+    }
+
+    // Add the row to the 2D vector
+    data.push_back(row);
+  }
+
+  // Test code for import
+  std::cout << "Data length (rows): " << data.size() << "\n";
+  std::cout << data[0][1] << "\n";
+  std::cout << data[1][1] << "\n";
+  std::cout << data[2][1] << "\n";
+}
+
+// void convert_csvdata_to_spicommand() {
+
+// }
 
 /*!
  *
@@ -135,43 +173,47 @@ int main()
 
 
   //******TEST FOR PERIODIC SEND******//
-  _running = true;
-  _counter = 0;
+//   _running = true;
+//   _counter = 0;
 
-#ifdef linux
-  auto timerFd = timerfd_create(CLOCK_MONOTONIC, 0);
-#endif
-  int seconds = (int)_period;
-  int nanoseconds = (int)(1e9 * std::fmod(_period, 1.f));
+// #ifdef linux
+//   auto timerFd = timerfd_create(CLOCK_MONOTONIC, 0);
+// #endif
+//   int seconds = (int)_period;
+//   int nanoseconds = (int)(1e9 * std::fmod(_period, 1.f));
 
-  Timer t;
+//   Timer t;
 
-#ifdef linux
-  itimerspec timerSpec;
-  timerSpec.it_interval.tv_sec = seconds;
-  timerSpec.it_value.tv_sec = seconds;
-  timerSpec.it_value.tv_nsec = nanoseconds;
-  timerSpec.it_interval.tv_nsec = nanoseconds;
+// #ifdef linux
+//   itimerspec timerSpec;
+//   timerSpec.it_interval.tv_sec = seconds;
+//   timerSpec.it_value.tv_sec = seconds;
+//   timerSpec.it_value.tv_nsec = nanoseconds;
+//   timerSpec.it_interval.tv_nsec = nanoseconds;
 
-  timerfd_settime(timerFd, 0, &timerSpec, nullptr);
-#endif
-  unsigned long long missed = 0;
+//   timerfd_settime(timerFd, 0, &timerSpec, nullptr);
+// #endif
+//   unsigned long long missed = 0;
 
-  printf("[PeriodicTask] Start %s (%d s, %d ns)\n", "spi", seconds,
-         nanoseconds);
-  while (_running) {
-    _lastPeriodTime = (float)t.getSeconds();
-    t.start();
-    runSpi();
-    _lastRuntime = (float)t.getSeconds();
-#ifdef linux
-    int m = read(timerFd, &missed, sizeof(missed));
-    (void)m;
-#endif
-    // _maxPeriod = std::max(_maxPeriod, _lastPeriodTime);
-    // _maxRuntime = std::max(_maxRuntime, _lastRuntime);
-    if (++_counter > _maxCounter) _running = false;
-  }
+//   printf("[PeriodicTask] Start %s (%d s, %d ns)\n", "spi", seconds,
+//          nanoseconds);
+//   while (_running) {
+//     _lastPeriodTime = (float)t.getSeconds();
+//     t.start();
+//     runSpi();
+//     _lastRuntime = (float)t.getSeconds();
+// #ifdef linux
+//     int m = read(timerFd, &missed, sizeof(missed));
+//     (void)m;
+// #endif
+//     // _maxPeriod = std::max(_maxPeriod, _lastPeriodTime);
+//     // _maxRuntime = std::max(_maxRuntime, _lastRuntime);
+//     if (++_counter > _maxCounter) _running = false;
+//   }
+
+
+  //******TEST FOR import_csv******//
+  import_csv();
 
   return 0;
 }
