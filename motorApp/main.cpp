@@ -43,7 +43,7 @@ std::vector<spi_command_t> commands;
 void import_csv() {
   std::ifstream infile("data.csv");
   std::string line;
-
+  int count = 0;
   while (std::getline(infile, line)) {
     // Create a stringstream from the line and use getline() again to 
     // split the line into individual values separated by commas
@@ -51,6 +51,7 @@ void import_csv() {
     std::string value_str;
     std::vector<float> row;
     while (std::getline(ss, value_str, ',')) {
+      std::cout << ++count;
       float value = std::stof(value_str);
       row.push_back(value);
     }
