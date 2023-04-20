@@ -55,8 +55,8 @@ const float disabled_torque[3] = {0.f, 0.f, 0.f};
 
 // TODO-biqu: testing numbers
 const float abad_side_sign[4] = {1, 1, 1, 1};
-// const float hip_side_sign[4] = {-1.f, 1.f, -1.f, 1.f};      // Original
-const float hip_side_sign[4] = {1.f, -1.f, 1.f, -1.f};         // Single leg test
+const float hip_side_sign[4] = {-1.f, 1.f, -1.f, 1.f};      // Original
+// const float hip_side_sign[4] = {1.f, -1.f, 1.f, -1.f};         // Single leg test
 const float knee_side_sign[4] = {1, 1, 1, 1};
 
 // TODO-biqu: testing numbers
