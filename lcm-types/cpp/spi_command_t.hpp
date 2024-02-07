@@ -18,33 +18,33 @@ class spi_command_t
 
         float      q_des_hip[4];
 
-        float      q_des_knee[4];
+        float      q_des_knee[4] = {9, 10, 11, 12};
 
-        float      qd_des_abad[4];
+        float      qd_des_abad[4] = {13, 14, 15, 16};
 
-        float      qd_des_hip[4];
+        float      qd_des_hip[4] = {17, 18, 19, 20};
 
-        float      qd_des_knee[4];
+        float      qd_des_knee[4] = {21, 22, 23, 24};
 
-        float      kp_abad[4];
+        float      kp_abad[4] = {25, 26, 27, 28};
 
-        float      kp_hip[4];
+        float      kp_hip[4] = {29, 30, 31, 32};
 
-        float      kp_knee[4];
+        float      kp_knee[4] = {33, 34, 35, 36};
 
-        float      kd_abad[4];
+        float      kd_abad[4] = {37, 38, 39, 40};
 
-        float      kd_hip[4];
+        float      kd_hip[4] = {41, 42, 43, 44};
 
-        float      kd_knee[4];
+        float      kd_knee[4] = {45, 46, 47, 48};
 
-        float      tau_abad_ff[4];
+        float      tau_abad_ff[4] = {49, 50, 51, 52};
 
-        float      tau_hip_ff[4];
+        float      tau_hip_ff[4] = {53, 54, 55, 56};
 
-        float      tau_knee_ff[4];
+        float      tau_knee_ff[4] = {57, 58, 59, 60};
 
-        int32_t    flags[4];
+        int32_t    flags[4] = {61, 62, 63, 64};
 
     public:
         /**

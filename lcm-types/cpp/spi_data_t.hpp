@@ -14,7 +14,7 @@
 class spi_data_t
 {
     public:
-        float      q_abad[4];
+        float q_abad[4];
 
         float      q_hip[4];
 
@@ -28,7 +28,7 @@ class spi_data_t
 
         int32_t    flags[4];
 
-        int32_t    spi_driver_status;
+        int32_t spi_driver_status;
 
     public:
         /**
